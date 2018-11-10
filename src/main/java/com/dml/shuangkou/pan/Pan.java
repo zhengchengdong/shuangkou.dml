@@ -32,6 +32,15 @@ public class Pan {
 	private String latestDapaiPlayerId;
 	private List<PanActionFrame> actionFrameList = new ArrayList<>();
 
+	public boolean ifPlayerHasPai(String playerId) {
+		ShuangkouPlayer player = shuangkouPlayerIdMajiangPlayerMap.get(playerId);
+		return !player.getAllShoupai().isEmpty();
+	}
+
+	public List<String> getAllPlayerId() {
+		return new ArrayList<>(shuangkouPlayerIdMajiangPlayerMap.keySet());
+	}
+
 	public PanActionFrame recordPanActionFrame(ShuangkouPlayerAction action, long actionTime) {
 		PanActionFrame frame = new PanActionFrame(action, new PanValueObject(this), actionTime);
 		actionFrameList.add(frame);

@@ -148,6 +148,10 @@ public class Ju {
 		return currentPan.recordPanActionFrame(guoAction, actionTime);
 	}
 
+	public int countFinishedPan() {
+		return finishedPanResultList.size();
+	}
+
 	public Pan getCurrentPan() {
 		return currentPan;
 	}

@@ -96,6 +96,10 @@ public class ShuangkouPlayer {
 		newPublicDachuPaiZu.setPaiArray(paiArray);
 		waihaoGenerator.generateWaihao(newPublicDachuPaiZu);
 		publicDachuPaiZu = newPublicDachuPaiZu;
+		for (int i = 0; i < paiIds.size(); i++) {
+			Integer paiId = paiIds.get(i);
+			allShoupai.remove(paiId);
+		}
 	}
 
 	public void guo() {
