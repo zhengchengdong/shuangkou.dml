@@ -53,6 +53,12 @@ public class ShuangkouPlayer {
 	 */
 	private List<DaPaiDianShuSolution> yaPaiSolutionsForTips = new ArrayList<>();
 
+	public void addShouPai(PukePai pukePai) {
+		allShoupai.put(pukePai.getId(), pukePai);
+		int ordinal = pukePai.getPaiMian().dianShu().ordinal();
+		shoupaiDianShuAmountArray[ordinal]++;
+	}
+
 	public void putYaPaiSolutionCandidates(List<DaPaiDianShuSolution> solutions) {
 		solutions.forEach((solution) -> yaPaiSolutionCandidates.put(solution.getDianshuZuheIdx(), solution));
 	}
@@ -98,6 +104,9 @@ public class ShuangkouPlayer {
 		publicDachuPaiZu = newPublicDachuPaiZu;
 		for (int i = 0; i < paiIds.size(); i++) {
 			Integer paiId = paiIds.get(i);
+			PukePai pukePai = allShoupai.get(paiId);
+			int ordinal = pukePai.getPaiMian().dianShu().ordinal();
+			shoupaiDianShuAmountArray[ordinal]--;
 			allShoupai.remove(paiId);
 		}
 	}
@@ -129,7 +138,7 @@ public class ShuangkouPlayer {
 	}
 
 	public void lipai(ShoupaiSortStrategy shoupaiSortStrategy) {
-		shoupaiIdListForSortList = shoupaiSortStrategy.sortShoupai(allShoupai);
+		shoupaiIdListForSortList = shoupaiSortStrategy.sortShoupai(allShoupai, shoupaiDianShuAmountArray);
 	}
 
 	public String getId() {

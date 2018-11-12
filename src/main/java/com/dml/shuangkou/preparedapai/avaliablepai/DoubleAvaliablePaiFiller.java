@@ -1,31 +1,25 @@
 package com.dml.shuangkou.preparedapai.avaliablepai;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Random;
 import java.util.Set;
 
 import com.dml.puke.pai.PukePai;
 import com.dml.puke.pai.PukePaiMian;
+import com.dml.puke.pai.QiShouLiangPaiMark;
+import com.dml.puke.pai.ZuDuiLiangPaiMark;
 import com.dml.shuangkou.ju.Ju;
 
 /**
- * 最普通的加入两副牌
+ * 最普通的加入两副牌 以红心8判断起手 以红心9分组
  * 
  * @author lsc
  *
  */
 public class DoubleAvaliablePaiFiller implements AvaliablePaiFiller {
 
-	private long seed;
-
 	public DoubleAvaliablePaiFiller() {
-	}
-
-	public DoubleAvaliablePaiFiller(long seed) {
-		this.seed = seed;
 	}
 
 	@Override
@@ -33,6 +27,7 @@ public class DoubleAvaliablePaiFiller implements AvaliablePaiFiller {
 		Set<PukePaiMian> notPlaySet = new HashSet<>();
 		PukePaiMian[] allPukePaiMianArray = PukePaiMian.values();
 		List<PukePaiMian> playPaiTypeList = new ArrayList<>();
+		// 移除不可用牌
 		for (int i = 0; i < allPukePaiMianArray.length; i++) {
 			PukePaiMian paimain = allPukePaiMianArray[i];
 			if (!notPlaySet.contains(paimain)) {
@@ -41,30 +36,25 @@ public class DoubleAvaliablePaiFiller implements AvaliablePaiFiller {
 		}
 
 		List<PukePai> allPaiList = new ArrayList<>();
+		// 生成两副牌
 		int id = 0;
 		for (PukePaiMian paiType : playPaiTypeList) {
 			for (int i = 0; i < 2; i++) {
 				PukePai pai = new PukePai();
 				pai.setId(id);
 				pai.setPaiMian(paiType);
+				if (i == 1 && PukePaiMian.hongxinba.equals(paiType)) {
+					pai.setMark(new QiShouLiangPaiMark());
+				}
+				if (i == 1 && PukePaiMian.hongxinjiu.equals(paiType)) {
+					pai.setMark(new ZuDuiLiangPaiMark());
+				}
 				allPaiList.add(pai);
 				id++;
 			}
 		}
 
-		Random r = new Random(seed);
-		r.nextInt(allPaiList.size());
-		Collections.shuffle(allPaiList, r);
 		ju.getCurrentPan().setAvaliablePaiList(allPaiList);
-		seed++;
-	}
-
-	public long getSeed() {
-		return seed;
-	}
-
-	public void setSeed(long seed) {
-		this.seed = seed;
 	}
 
 }

@@ -12,5 +12,5 @@ import com.dml.puke.pai.PukePai;
  *
  */
 public interface ShoupaiSortStrategy {
-	public List<List<Integer>> sortShoupai(Map<Integer, PukePai> allShoupai);
+	public List<List<Integer>> sortShoupai(Map<Integer, PukePai> allShoupai, int[] shoupaiDianShuAmountArray);
 }

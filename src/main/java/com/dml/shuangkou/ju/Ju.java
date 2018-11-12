@@ -152,6 +152,14 @@ public class Ju {
 		return finishedPanResultList.size();
 	}
 
+	public PanResult findLatestFinishedPanResult() {
+		if (!finishedPanResultList.isEmpty()) {
+			return finishedPanResultList.get(finishedPanResultList.size() - 1);
+		} else {
+			return null;
+		}
+	}
+
 	public Pan getCurrentPan() {
 		return currentPan;
 	}
