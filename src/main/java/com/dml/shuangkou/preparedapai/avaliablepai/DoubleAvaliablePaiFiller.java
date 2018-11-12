@@ -11,6 +11,12 @@ import com.dml.puke.pai.PukePai;
 import com.dml.puke.pai.PukePaiMian;
 import com.dml.shuangkou.ju.Ju;
 
+/**
+ * 最普通的加入两副牌
+ * 
+ * @author lsc
+ *
+ */
 public class DoubleAvaliablePaiFiller implements AvaliablePaiFiller {
 
 	private long seed;
