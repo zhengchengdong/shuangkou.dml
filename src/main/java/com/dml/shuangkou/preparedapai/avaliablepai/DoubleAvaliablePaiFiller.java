@@ -7,12 +7,10 @@ import java.util.Set;
 
 import com.dml.puke.pai.PukePai;
 import com.dml.puke.pai.PukePaiMian;
-import com.dml.puke.pai.QiShouLiangPaiMark;
-import com.dml.puke.pai.ZuDuiLiangPaiMark;
 import com.dml.shuangkou.ju.Ju;
 
 /**
- * 最普通的加入两副牌 以红心8判断起手 以红心9分组
+ * 最普通的加入两副牌
  * 
  * @author lsc
  *
@@ -43,12 +41,6 @@ public class DoubleAvaliablePaiFiller implements AvaliablePaiFiller {
 				PukePai pai = new PukePai();
 				pai.setId(id);
 				pai.setPaiMian(paiType);
-				if (i == 1 && PukePaiMian.hongxinba.equals(paiType)) {
-					pai.setMark(new QiShouLiangPaiMark());
-				}
-				if (i == 1 && PukePaiMian.hongxinjiu.equals(paiType)) {
-					pai.setMark(new ZuDuiLiangPaiMark());
-				}
 				allPaiList.add(pai);
 				id++;
 			}

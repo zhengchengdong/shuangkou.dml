@@ -39,9 +39,12 @@ public class Ju {
 
 	private AvaliablePaiFiller avaliablePaiFiller;
 	private LuanpaiStrategy luanpaiStrategyForFirstPan;
+	private LuanpaiStrategy luanpaiStrategyForNextPan;
 	private FapaiStrategy fapaiStrategyForFirstPan;
+	private FapaiStrategy fapaiStrategyForNextPan;
 	private ShoupaiSortStrategy shoupaiSortStrategy;
 	private ZuduiStrategy zuduiStrategyForFirstPan;
+	private ZuduiStrategy zuduiStrategyForNextPan;
 	private XiandaPlayerDeterminer xiandaPlayerDeterminer;
 	private KeyaDaPaiDianShuSolutionsGenerator keyaDaPaiDianShuSolutionsGenerator;
 	private YaPaiSolutionsTipsFilter yaPaiSolutionsTipsFilter;
@@ -327,6 +330,30 @@ public class Ju {
 
 	public void setZaDanYaPaiSolutionCalculator(ZaDanYaPaiSolutionCalculator zaDanYaPaiSolutionCalculator) {
 		this.zaDanYaPaiSolutionCalculator = zaDanYaPaiSolutionCalculator;
+	}
+
+	public LuanpaiStrategy getLuanpaiStrategyForNextPan() {
+		return luanpaiStrategyForNextPan;
+	}
+
+	public void setLuanpaiStrategyForNextPan(LuanpaiStrategy luanpaiStrategyForNextPan) {
+		this.luanpaiStrategyForNextPan = luanpaiStrategyForNextPan;
+	}
+
+	public FapaiStrategy getFapaiStrategyForNextPan() {
+		return fapaiStrategyForNextPan;
+	}
+
+	public void setFapaiStrategyForNextPan(FapaiStrategy fapaiStrategyForNextPan) {
+		this.fapaiStrategyForNextPan = fapaiStrategyForNextPan;
+	}
+
+	public ZuduiStrategy getZuduiStrategyForNextPan() {
+		return zuduiStrategyForNextPan;
+	}
+
+	public void setZuduiStrategyForNextPan(ZuduiStrategy zuduiStrategyForNextPan) {
+		this.zuduiStrategyForNextPan = zuduiStrategyForNextPan;
 	}
 
 }

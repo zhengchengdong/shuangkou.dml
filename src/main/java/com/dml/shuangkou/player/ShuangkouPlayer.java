@@ -138,7 +138,7 @@ public class ShuangkouPlayer {
 	}
 
 	public void lipai(ShoupaiSortStrategy shoupaiSortStrategy) {
-		shoupaiIdListForSortList = shoupaiSortStrategy.sortShoupai(allShoupai, shoupaiDianShuAmountArray);
+		shoupaiIdListForSortList = shoupaiSortStrategy.sortShoupai(allShoupai);
 	}
 
 	public String getId() {

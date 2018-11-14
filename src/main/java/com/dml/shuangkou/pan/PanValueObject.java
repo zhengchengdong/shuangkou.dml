@@ -1,5 +1,6 @@
 package com.dml.shuangkou.pan;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.dml.puke.pai.PukePai;
@@ -15,8 +16,8 @@ public class PanValueObject {
 
 	public PanValueObject(Pan pan) {
 		this.no = pan.getNo();
-		this.avaliablePaiList = pan.getAvaliablePaiList();
-		this.dachuPaiZuList = pan.getDachuPaiZuList();
+		this.avaliablePaiList = new ArrayList<>(pan.getAvaliablePaiList());
+		this.dachuPaiZuList = new ArrayList<>(pan.getDachuPaiZuList());
 	}
 
 	public int getNo() {
