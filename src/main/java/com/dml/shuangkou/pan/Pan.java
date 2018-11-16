@@ -1,6 +1,7 @@
 package com.dml.shuangkou.pan;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -57,12 +58,31 @@ public class Pan {
 		actionFrameList.add(panActionFrame);
 	}
 
+	public List<String> sortedPlayerIdList() {
+		List<String> list = new ArrayList<>(shuangkouPlayerIdMajiangPlayerMap.keySet());
+		Collections.sort(list);
+		return list;
+	}
+
 	public void updateActionPositionByActionPlayer(String playerId) throws Exception {
 		ShuangkouPlayer player = shuangkouPlayerIdMajiangPlayerMap.get(playerId);
 		if (player == null) {
 			throw new PlayerNotFoundException();
 		}
 		actionPosition = player.getPosition();
+	}
+
+	public void updatePlayerPosition(String playerId, Position position) throws PlayerNotFoundException {
+		ShuangkouPlayer player = shuangkouPlayerIdMajiangPlayerMap.get(playerId);
+		if (player == null) {
+			throw new PlayerNotFoundException();
+		}
+		player.setPosition(position);
+		positionPlayerIdMap.put(position, playerId);
+	}
+
+	public String playerIdForPosition(Position position) {
+		return positionPlayerIdMap.get(position);
 	}
 
 	public DaAction da(String playerId, List<Integer> paiIds, String dianshuZuheIdx, WaihaoGenerator waihaoGenerator)
