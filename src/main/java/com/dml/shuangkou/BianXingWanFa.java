@@ -1,4 +1,4 @@
-package com.dml.shuangkou.preparedapai.luanpai;
+package com.dml.shuangkou;
 
 public enum BianXingWanFa {
 	qianbian, banqianbian, baibian, bubian
