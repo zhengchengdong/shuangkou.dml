@@ -6,7 +6,6 @@ import java.util.List;
 
 import com.dml.puke.pai.PukePai;
 import com.dml.puke.wanfa.dianshu.paizu.DianShuZuPaiZu;
-import com.dml.shuangkou.BianXingWanFa;
 import com.dml.shuangkou.ju.Ju;
 import com.dml.shuangkou.pan.Pan;
 import com.dml.shuangkou.pan.PanResult;
@@ -18,14 +17,9 @@ import com.dml.shuangkou.pan.PanResult;
  *
  */
 public class LastPanChuPaiOrdinalLuanpaiStrategy implements LuanpaiStrategy {
-	private BianXingWanFa bx;
 
 	public LastPanChuPaiOrdinalLuanpaiStrategy() {
 
-	}
-
-	public LastPanChuPaiOrdinalLuanpaiStrategy(BianXingWanFa bx) {
-		this.bx = bx;
 	}
 
 	@Override
@@ -38,14 +32,6 @@ public class LastPanChuPaiOrdinalLuanpaiStrategy implements LuanpaiStrategy {
 			allPaiList.addAll(Arrays.asList(paizu.getPaiArray()));
 		}
 		currentPan.setAvaliablePaiList(allPaiList);
-	}
-
-	public BianXingWanFa getBx() {
-		return bx;
-	}
-
-	public void setBx(BianXingWanFa bx) {
-		this.bx = bx;
 	}
 
 }

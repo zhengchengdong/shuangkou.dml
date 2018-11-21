@@ -85,7 +85,7 @@ public class Ju {
 		player.generateYaPaiSolutionsForTips(yaPaiSolutionsTipsFilter);
 
 		// 滑动提示
-		player.generateDaPaiSolutionsForTips(kedaPaiSolutionsForTipsGenerator);
+		// player.generateDaPaiSolutionsForTips(kedaPaiSolutionsForTipsGenerator);
 
 		currentPan.updateActionPositionByActionPlayer(dapaiPlayerId);
 
@@ -93,8 +93,8 @@ public class Ju {
 
 	}
 
-	public PanActionFrame da(String playerId, List<Integer> paiIds, String dianshuZuheIdx,
-			WaihaoGenerator waihaoGenerator, long actionTime) throws Exception {
+	public PanActionFrame da(String playerId, List<Integer> paiIds, String dianshuZuheIdx, long actionTime)
+			throws Exception {
 		DaAction daAction = currentPan.da(playerId, paiIds, dianshuZuheIdx, waihaoGenerator);
 		// 理牌每次要理的
 		currentPan.findPlayer(playerId).lipai(shoupaiSortStrategy);
@@ -115,7 +115,7 @@ public class Ju {
 			// 可压提示过滤
 			currentPan.generateYaPaiSolutionsForTips(yaPaiSolutionsTipsFilter);
 			// 划起提示
-			currentPan.generateDaPaiSolutionsForTips(kedaPaiSolutionsForTipsGenerator);
+			// currentPan.generateDaPaiSolutionsForTips(kedaPaiSolutionsForTipsGenerator);
 
 			currentPan.updateActionPositionToNextPlayer();
 			return currentPan.recordPanActionFrame(daAction, actionTime);
@@ -137,7 +137,7 @@ public class Ju {
 			nextPlayer.generateYaPaiSolutionsForTips(yaPaiSolutionsTipsFilter);
 
 			// 划起提示
-			nextPlayer.generateDaPaiSolutionsForTips(kedaPaiSolutionsForTipsGenerator);
+			// nextPlayer.generateDaPaiSolutionsForTips(kedaPaiSolutionsForTipsGenerator);
 
 		} else {
 			// 生成下家的候选方案。
@@ -145,7 +145,7 @@ public class Ju {
 			// 可压提示过滤
 			currentPan.generateYaPaiSolutionsForTips(yaPaiSolutionsTipsFilter);
 			// 划起提示
-			currentPan.generateDaPaiSolutionsForTips(kedaPaiSolutionsForTipsGenerator);
+			// currentPan.generateDaPaiSolutionsForTips(kedaPaiSolutionsForTipsGenerator);
 		}
 		currentPan.updateActionPositionToNextPlayer();
 		return currentPan.recordPanActionFrame(guoAction, actionTime);

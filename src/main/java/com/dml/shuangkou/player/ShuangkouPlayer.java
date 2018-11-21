@@ -109,12 +109,15 @@ public class ShuangkouPlayer {
 			shoupaiDianShuAmountArray[ordinal]--;
 			allShoupai.remove(paiId);
 		}
+		yaPaiSolutionCandidates.clear();
+		yaPaiSolutionsForTips.clear();
+		// daPaiSolutionsForTips.clear();
 	}
 
 	public void guo() {
 		yaPaiSolutionCandidates.clear();
 		yaPaiSolutionsForTips.clear();
-		yaPaiSolutionsForTips.clear();
+		// daPaiSolutionsForTips.clear();
 	}
 
 	public void putPublicDachuPaiZuToLishi() {

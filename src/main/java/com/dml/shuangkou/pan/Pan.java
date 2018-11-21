@@ -48,6 +48,14 @@ public class Pan {
 		return frame;
 	}
 
+	public PanActionFrame findLatestActionFrame() {
+		if (!actionFrameList.isEmpty()) {
+			return actionFrameList.get(actionFrameList.size() - 1);
+		} else {
+			return null;
+		}
+	}
+
 	public void addPlayer(String playerId) {
 		ShuangkouPlayer shuangkouPlayer = new ShuangkouPlayer();
 		shuangkouPlayer.setId(playerId);
