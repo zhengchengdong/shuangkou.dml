@@ -81,8 +81,8 @@ public class Ju {
 		player.putYaPaiSolutionCandidates(
 				allKedaPaiSolutionsGenerator.generateAllKedaPaiSolutions(player.getAllShoupai()));
 
-		// 提示
-		player.generateYaPaiSolutionsForTips(yaPaiSolutionsTipsFilter);
+		// TODO 提示
+		// player.generateYaPaiSolutionsForTips(yaPaiSolutionsTipsFilter);
 
 		// 滑动提示
 		// player.generateDaPaiSolutionsForTips(kedaPaiSolutionsForTipsGenerator);
