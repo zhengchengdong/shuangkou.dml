@@ -81,8 +81,8 @@ public class Ju {
 		player.putYaPaiSolutionCandidates(
 				allKedaPaiSolutionsGenerator.generateAllKedaPaiSolutions(player.getAllShoupai()));
 
-		// TODO 提示
-		// player.generateYaPaiSolutionsForTips(yaPaiSolutionsTipsFilter);
+		// 提示
+		player.generateYaPaiSolutionsForTips(yaPaiSolutionsTipsFilter);
 
 		// 滑动提示
 		// player.generateDaPaiSolutionsForTips(kedaPaiSolutionsForTipsGenerator);
@@ -90,6 +90,41 @@ public class Ju {
 		currentPan.updateActionPositionByActionPlayer(dapaiPlayerId);
 
 		currentPan.addFrame(new PanActionFrame(null, new PanValueObject(currentPan), startTime));
+
+	}
+
+	public void startNextPan() throws Exception {
+		actionStatisticsListenerManager.updateListenersForNextPan();
+		Pan nextPan = new Pan();
+		nextPan.setNo(countFinishedPan() + 1);
+		PanResult latestFinishedPanResult = findLatestFinishedPanResult();
+		List<String> allPlayerIds = latestFinishedPanResult.allPlayerIds();
+		allPlayerIds.forEach((pid) -> nextPan.addPlayer(pid));
+
+		avaliablePaiFiller.fillAvaliablePai(this);
+
+		// 先乱牌，再发牌，再理牌，再组队
+		luanpaiStrategyForNextPan.luanpai(this);
+		fapaiStrategyForNextPan.fapai(this);
+		currentPan.getShuangkouPlayerIdMajiangPlayerMap().values()
+				.forEach((player) -> player.lipai(shoupaiSortStrategy));
+		zuduiStrategyForNextPan.zudui(this);
+
+		// 谁第一个打牌
+		String dapaiPlayerId = xiandaPlayerDeterminer.determineXiandaPlayer(this);
+		ShuangkouPlayer player = currentPan.findPlayer(dapaiPlayerId);
+		player.putYaPaiSolutionCandidates(
+				allKedaPaiSolutionsGenerator.generateAllKedaPaiSolutions(player.getAllShoupai()));
+
+		// 提示
+		player.generateYaPaiSolutionsForTips(yaPaiSolutionsTipsFilter);
+
+		// 滑动提示
+		// player.generateDaPaiSolutionsForTips(kedaPaiSolutionsForTipsGenerator);
+
+		currentPan.updateActionPositionByActionPlayer(dapaiPlayerId);
+
+		currentPan.addFrame(new PanActionFrame(null, new PanValueObject(currentPan), System.currentTimeMillis()));
 
 	}
 
@@ -149,6 +184,10 @@ public class Ju {
 		}
 		currentPan.updateActionPositionToNextPlayer();
 		return currentPan.recordPanActionFrame(guoAction, actionTime);
+	}
+
+	public void finish() {
+		juResult = juResultBuilder.buildJuResult(this);
 	}
 
 	public int countFinishedPan() {

@@ -14,6 +14,10 @@ public class ActionStatisticsListenerManager {
 	private List<DaActionStatisticsListener> daActionStatisticsListeners = new ArrayList<>();
 	private List<GuoActionStatisticsListener> guoActionStatisticsListeners = new ArrayList<>();
 
+	public void updateListenersForNextPan() {
+		daActionStatisticsListeners.forEach((listener) -> listener.updateForNextPan());
+	}
+
 	public void updateDaActionListener(DaAction daAction, Ju ju) {
 		for (DaActionStatisticsListener listener : daActionStatisticsListeners) {
 			listener.update(daAction, ju);
