@@ -29,6 +29,7 @@ public class Pan {
 	private Map<Position, String> positionPlayerIdMap = new HashMap<>();
 	private List<PukePai> avaliablePaiList = new ArrayList<>();
 	private List<DianShuZuPaiZu> dachuPaiZuList = new ArrayList<>();
+	private List<String> noPaiPlayerIdList = new ArrayList<>();
 	private Position actionPosition;
 	private String latestDapaiPlayerId;
 	private List<PanActionFrame> actionFrameList = new ArrayList<>();
@@ -44,6 +45,7 @@ public class Pan {
 
 	public PanActionFrame recordPanActionFrame(ShuangkouPlayerAction action, long actionTime) {
 		PanActionFrame frame = new PanActionFrame(action, new PanValueObject(this), actionTime);
+		frame.setNo(actionFrameList.size());
 		actionFrameList.add(frame);
 		return frame;
 	}
@@ -112,6 +114,9 @@ public class Pan {
 		DianShuZuPaiZu publicDachuPaiZu = daPlayer.getPublicDachuPaiZu();
 		dachuPaiZuList.add(publicDachuPaiZu);
 		latestDapaiPlayerId = playerId;
+		if (daPlayer.getAllShoupai().isEmpty()) {
+			noPaiPlayerIdList.add(playerId);
+		}
 		DaAction daAction = new DaAction(playerId);
 		daAction.setDachuPaiZu(publicDachuPaiZu);
 		return daAction;
@@ -143,7 +148,7 @@ public class Pan {
 				if (dachuPaiZu != null) {
 					Position nextPosition = PositionUtil.nextPositionAntiClockwise(actionPosition);
 					String yapaiPlayerId = positionPlayerIdMap.get(nextPosition);
-					while (!ifPlayerHasPai(yapaiPlayerId)) {
+					while (!ifPlayerHasPai(yapaiPlayerId)) {// 打完牌了，有可能死循环
 						nextPosition = PositionUtil.nextPositionAntiClockwise(actionPosition);
 						yapaiPlayerId = positionPlayerIdMap.get(nextPosition);
 					}
@@ -165,7 +170,7 @@ public class Pan {
 	public void generateYaPaiSolutionsForTips(YaPaiSolutionsTipsFilter yaPaiSolutionsTipsFilter) {
 		Position nextPosition = PositionUtil.nextPositionAntiClockwise(actionPosition);
 		String yapaiPlayerId = positionPlayerIdMap.get(nextPosition);
-		while (!ifPlayerHasPai(yapaiPlayerId)) {// 打完牌了
+		while (!ifPlayerHasPai(yapaiPlayerId)) {// //打完牌了，有可能死循环
 			nextPosition = PositionUtil.nextPositionAntiClockwise(actionPosition);
 			yapaiPlayerId = positionPlayerIdMap.get(nextPosition);
 		}
@@ -180,7 +185,7 @@ public class Pan {
 	public void generateDaPaiSolutionsForTips(KedaPaiSolutionsForTipsGenerator kedaPaiSolutionsForTipsGenerator) {
 		Position nextPosition = PositionUtil.nextPositionAntiClockwise(actionPosition);
 		String yapaiPlayerId = positionPlayerIdMap.get(nextPosition);
-		while (!ifPlayerHasPai(yapaiPlayerId)) {// 打完牌了
+		while (!ifPlayerHasPai(yapaiPlayerId)) {// //打完牌了，有可能死循环
 			nextPosition = PositionUtil.nextPositionAntiClockwise(actionPosition);
 			yapaiPlayerId = positionPlayerIdMap.get(nextPosition);
 		}
@@ -195,7 +200,7 @@ public class Pan {
 	public void updateActionPositionToNextPlayer() {
 		Position nextPosition = PositionUtil.nextPositionAntiClockwise(actionPosition);
 		String yapaiPlayerId = positionPlayerIdMap.get(nextPosition);
-		while (!ifPlayerHasPai(yapaiPlayerId)) {// 打完牌了
+		while (!ifPlayerHasPai(yapaiPlayerId)) {// //打完牌了，有可能死循环
 			nextPosition = PositionUtil.nextPositionAntiClockwise(actionPosition);
 			yapaiPlayerId = positionPlayerIdMap.get(nextPosition);
 		}
@@ -206,9 +211,28 @@ public class Pan {
 		return shuangkouPlayerIdMajiangPlayerMap.get(dapaiPlayerId);
 	}
 
+	public ShuangkouPlayer findDuijiaPlayer(String playerId) {
+		ShuangkouPlayer player = shuangkouPlayerIdMajiangPlayerMap.get(playerId);
+		if (player == null) {
+			return null;
+		}
+		Position nextPosition = PositionUtil.nextPositionAntiClockwise(player.getPosition());
+		nextPosition = PositionUtil.nextPositionAntiClockwise(nextPosition);
+		String duijiaPlayerId = positionPlayerIdMap.get(nextPosition);
+		if (duijiaPlayerId == null) {
+			return null;
+		}
+		return shuangkouPlayerIdMajiangPlayerMap.get(duijiaPlayerId);
+	}
+
 	public String nextPlayerId() {
 		Position nextPosition = PositionUtil.nextPositionAntiClockwise(actionPosition);
-		return positionPlayerIdMap.get(nextPosition);
+		String yapaiPlayerId = positionPlayerIdMap.get(nextPosition);
+		while (!ifPlayerHasPai(yapaiPlayerId)) {// //打完牌了，有可能死循环
+			nextPosition = PositionUtil.nextPositionAntiClockwise(actionPosition);
+			yapaiPlayerId = positionPlayerIdMap.get(nextPosition);
+		}
+		return yapaiPlayerId;
 	}
 
 	public int getNo() {
@@ -241,6 +265,14 @@ public class Pan {
 
 	public void setAvaliablePaiList(List<PukePai> avaliablePaiList) {
 		this.avaliablePaiList = avaliablePaiList;
+	}
+
+	public List<String> getNoPaiPlayerIdList() {
+		return noPaiPlayerIdList;
+	}
+
+	public void setNoPaiPlayerIdList(List<String> noPaiPlayerIdList) {
+		this.noPaiPlayerIdList = noPaiPlayerIdList;
 	}
 
 	public List<DianShuZuPaiZu> getDachuPaiZuList() {

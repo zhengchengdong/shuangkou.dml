@@ -7,6 +7,7 @@ public abstract class ShuangkouPlayerAction {
 	private String actionPlayerId;
 
 	public ShuangkouPlayerAction() {
+
 	}
 
 	public ShuangkouPlayerAction(ShuangkouPlayerActionType type, String actionPlayerId) {

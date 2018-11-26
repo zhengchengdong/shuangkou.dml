@@ -30,6 +30,24 @@ public class ActionStatisticsListenerManager {
 		}
 	}
 
+	public <T extends DaActionStatisticsListener> T findDaListener(Class<T> type) {
+		for (DaActionStatisticsListener listener : daActionStatisticsListeners) {
+			if (listener.getClass().equals(type)) {
+				return (T) listener;
+			}
+		}
+		return null;
+	}
+
+	public <T extends GuoActionStatisticsListener> T findGuoListener(Class<T> type) {
+		for (GuoActionStatisticsListener listener : guoActionStatisticsListeners) {
+			if (listener.getClass().equals(type)) {
+				return (T) listener;
+			}
+		}
+		return null;
+	}
+
 	public List<DaActionStatisticsListener> getDaActionStatisticsListeners() {
 		return daActionStatisticsListeners;
 	}

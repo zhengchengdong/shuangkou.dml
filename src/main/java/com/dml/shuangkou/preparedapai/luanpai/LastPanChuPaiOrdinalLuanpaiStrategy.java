@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import com.dml.puke.pai.PaiListValueObject;
 import com.dml.puke.pai.PukePai;
 import com.dml.puke.wanfa.dianshu.paizu.DianShuZuPaiZu;
 import com.dml.shuangkou.ju.Ju;
@@ -26,8 +27,10 @@ public class LastPanChuPaiOrdinalLuanpaiStrategy implements LuanpaiStrategy {
 	public void luanpai(Ju ju) throws Exception {
 		Pan currentPan = ju.getCurrentPan();
 		PanResult lastPanResult = ju.findLatestFinishedPanResult();
+		PaiListValueObject paiListValueObject = lastPanResult.getPan().getPaiListValueObject();
 		List<DianShuZuPaiZu> dachuPaiZuList = lastPanResult.getPan().getDachuPaiZuList();
 		List<PukePai> allPaiList = new ArrayList<>();
+		allPaiList.addAll(paiListValueObject.getPaiList());
 		for (DianShuZuPaiZu paizu : dachuPaiZuList) {
 			allPaiList.addAll(Arrays.asList(paizu.getPaiArray()));
 		}

@@ -3,6 +3,7 @@ package com.dml.shuangkou.pan;
 import com.dml.shuangkou.player.action.ShuangkouPlayerAction;
 
 public class PanActionFrame {
+	private int no;
 	private ShuangkouPlayerAction action;
 	private PanValueObject panAfterAction;
 	private long actionTime;
@@ -14,6 +15,14 @@ public class PanActionFrame {
 		this.action = action;
 		this.panAfterAction = panAfterAction;
 		this.actionTime = actionTime;
+	}
+
+	public int getNo() {
+		return no;
+	}
+
+	public void setNo(int no) {
+		this.no = no;
 	}
 
 	public ShuangkouPlayerAction getAction() {
