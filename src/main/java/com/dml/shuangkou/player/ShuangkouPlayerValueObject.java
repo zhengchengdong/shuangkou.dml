@@ -28,13 +28,13 @@ public class ShuangkouPlayerValueObject {
 	public ShuangkouPlayerValueObject(ShuangkouPlayer shuangkouPlayer) {
 		id = shuangkouPlayer.getId();
 		position = shuangkouPlayer.getPosition();
-		allShoupai = new ArrayList<>(allShoupai);
+		allShoupai = new ArrayList<>(shuangkouPlayer.getAllShoupai().values());
 		shoupaiDianShuAmountArray = shuangkouPlayer.getShoupaiDianShuAmountArray().clone();
 		shoupaiIdListForSortList = new ArrayList<>(shuangkouPlayer.getShoupaiIdListForSortList());
 		lishiDachuPaiZuList = new ArrayList<>(shuangkouPlayer.getLishiDachuPaiZuList());
 		publicDachuPaiZu = shuangkouPlayer.getPublicDachuPaiZu();
-		yaPaiSolutionCandidates = new ArrayList<>(yaPaiSolutionCandidates);
-		yaPaiSolutionsForTips = new ArrayList<>(yaPaiSolutionsForTips);
+		yaPaiSolutionCandidates = new ArrayList<>(shuangkouPlayer.getYaPaiSolutionCandidates().values());
+		yaPaiSolutionsForTips = new ArrayList<>(shuangkouPlayer.getYaPaiSolutionsForTips());
 	}
 
 	public String getId() {
