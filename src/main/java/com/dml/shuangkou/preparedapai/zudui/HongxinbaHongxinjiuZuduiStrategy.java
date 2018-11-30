@@ -42,6 +42,12 @@ public class HongxinbaHongxinjiuZuduiStrategy implements ZuduiStrategy {
 				}
 			}
 		}
+		if (qishouPlayerId == null) {
+			qishouPlayerId = playerIdList.get(0);
+		}
+		if (duijiaPlayerId == null) {
+			qishouPlayerId = playerIdList.get(1);
+		}
 		currentPan.updatePlayerPosition(qishouPlayerId, Position.dong);
 		playerIdList.remove(qishouPlayerId);
 		if (qishouPlayerId.equals(duijiaPlayerId)) {
