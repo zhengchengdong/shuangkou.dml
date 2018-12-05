@@ -108,13 +108,13 @@ public class SanwuHasSiwangLuanpaiStrategy implements LuanpaiStrategy {
 			firstIndex = firstIndex ^ secondIndex;
 		}
 		for (int j = 0; j < firstIndex; j++) {
-			paiList1.add(allPaiList.get(j));
+			paiList1.add(tmpPaiList.get(j));
 		}
 		for (int j = firstIndex; j < secondIndex; j++) {
-			paiList2.add(allPaiList.get(j));
+			paiList2.add(tmpPaiList.get(j));
 		}
 		for (int j = secondIndex; j < tmpPaiList.size(); j++) {
-			paiList3.add(allPaiList.get(j));
+			paiList3.add(tmpPaiList.get(j));
 		}
 		List<Integer> ordinalList = new ArrayList<>(Arrays.asList(new Integer[] { 0, 1, 2 }));
 		for (int i = 0; i < 3; i++) {

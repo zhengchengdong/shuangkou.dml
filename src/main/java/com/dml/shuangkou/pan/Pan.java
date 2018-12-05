@@ -36,6 +36,7 @@ public class Pan {
 
 	public boolean ifPlayerHasPai(String playerId) {
 		ShuangkouPlayer player = shuangkouPlayerIdMajiangPlayerMap.get(playerId);
+		// 需要抛异常
 		return !player.getAllShoupai().isEmpty();
 	}
 
@@ -130,8 +131,8 @@ public class Pan {
 		if (!actionPosition.equals(player.getPosition())) {
 			throw new PlayerCanNotActionException();
 		}
-		// 大的人必须出牌，不能过
-		if (playerId.equals(latestDapaiPlayerId)) {
+		// 大的人必须出牌，不能过，第一手牌也不能过
+		if (latestDapaiPlayerId == null || playerId.equals(latestDapaiPlayerId)) {
 			throw new CanNotGuoException();
 		}
 		player.guo();
@@ -146,10 +147,11 @@ public class Pan {
 			if (dachuPlayer != null) {
 				DianShuZuPaiZu dachuPaiZu = dachuPlayer.getPublicDachuPaiZu();
 				if (dachuPaiZu != null) {
-					Position nextPosition = PositionUtil.nextPositionAntiClockwise(actionPosition);
+					Position nextPosition = PositionUtil.nextPositionClockwise(actionPosition);
 					String yapaiPlayerId = positionPlayerIdMap.get(nextPosition);
-					while (!ifPlayerHasPai(yapaiPlayerId)) {// 打完牌了，有可能死循环
-						nextPosition = PositionUtil.nextPositionAntiClockwise(actionPosition);
+					while ((yapaiPlayerId == null || !ifPlayerHasPai(yapaiPlayerId))
+							&& !nextPosition.equals(actionPosition)) {// 打完牌了，有可能死循环
+						nextPosition = PositionUtil.nextPositionClockwise(nextPosition);
 						yapaiPlayerId = positionPlayerIdMap.get(nextPosition);
 					}
 					if (yapaiPlayerId != null) {
@@ -168,10 +170,10 @@ public class Pan {
 	}
 
 	public void generateYaPaiSolutionsForTips(YaPaiSolutionsTipsFilter yaPaiSolutionsTipsFilter) {
-		Position nextPosition = PositionUtil.nextPositionAntiClockwise(actionPosition);
+		Position nextPosition = PositionUtil.nextPositionClockwise(actionPosition);
 		String yapaiPlayerId = positionPlayerIdMap.get(nextPosition);
-		while (!ifPlayerHasPai(yapaiPlayerId)) {// //打完牌了，有可能死循环
-			nextPosition = PositionUtil.nextPositionAntiClockwise(actionPosition);
+		while ((yapaiPlayerId == null || !ifPlayerHasPai(yapaiPlayerId)) && !nextPosition.equals(actionPosition)) {// //打完牌了，有可能死循环
+			nextPosition = PositionUtil.nextPositionClockwise(nextPosition);
 			yapaiPlayerId = positionPlayerIdMap.get(nextPosition);
 		}
 		if (yapaiPlayerId != null) {
@@ -183,10 +185,10 @@ public class Pan {
 	}
 
 	public void generateDaPaiSolutionsForTips(KedaPaiSolutionsForTipsGenerator kedaPaiSolutionsForTipsGenerator) {
-		Position nextPosition = PositionUtil.nextPositionAntiClockwise(actionPosition);
+		Position nextPosition = PositionUtil.nextPositionClockwise(actionPosition);
 		String yapaiPlayerId = positionPlayerIdMap.get(nextPosition);
-		while (!ifPlayerHasPai(yapaiPlayerId)) {// //打完牌了，有可能死循环
-			nextPosition = PositionUtil.nextPositionAntiClockwise(actionPosition);
+		while ((yapaiPlayerId == null || !ifPlayerHasPai(yapaiPlayerId)) && !nextPosition.equals(actionPosition)) {// //打完牌了，有可能死循环
+			nextPosition = PositionUtil.nextPositionClockwise(nextPosition);
 			yapaiPlayerId = positionPlayerIdMap.get(nextPosition);
 		}
 		if (yapaiPlayerId != null) {
@@ -198,10 +200,10 @@ public class Pan {
 	}
 
 	public void updateActionPositionToNextPlayer() {
-		Position nextPosition = PositionUtil.nextPositionAntiClockwise(actionPosition);
+		Position nextPosition = PositionUtil.nextPositionClockwise(actionPosition);
 		String yapaiPlayerId = positionPlayerIdMap.get(nextPosition);
-		while (!ifPlayerHasPai(yapaiPlayerId)) {// //打完牌了，有可能死循环
-			nextPosition = PositionUtil.nextPositionAntiClockwise(actionPosition);
+		while ((yapaiPlayerId == null || !ifPlayerHasPai(yapaiPlayerId)) && !nextPosition.equals(actionPosition)) {// //打完牌了，有可能死循环
+			nextPosition = PositionUtil.nextPositionClockwise(nextPosition);
 			yapaiPlayerId = positionPlayerIdMap.get(nextPosition);
 		}
 		actionPosition = nextPosition;
@@ -228,8 +230,8 @@ public class Pan {
 	public String nextPlayerId() {
 		Position nextPosition = PositionUtil.nextPositionAntiClockwise(actionPosition);
 		String yapaiPlayerId = positionPlayerIdMap.get(nextPosition);
-		while (!ifPlayerHasPai(yapaiPlayerId)) {// //打完牌了，有可能死循环
-			nextPosition = PositionUtil.nextPositionAntiClockwise(actionPosition);
+		while ((yapaiPlayerId == null || !ifPlayerHasPai(yapaiPlayerId)) && !nextPosition.equals(actionPosition)) {// //打完牌了，有可能死循环
+			nextPosition = PositionUtil.nextPositionAntiClockwise(nextPosition);
 			yapaiPlayerId = positionPlayerIdMap.get(nextPosition);
 		}
 		return yapaiPlayerId;

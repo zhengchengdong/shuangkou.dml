@@ -15,12 +15,14 @@ import com.dml.shuangkou.player.ShuangkouPlayer;
 import com.dml.shuangkou.player.action.ActionStatisticsListenerManager;
 import com.dml.shuangkou.player.action.da.AllKedaPaiSolutionsGenerator;
 import com.dml.shuangkou.player.action.da.DaAction;
+import com.dml.shuangkou.player.action.da.DaActionStatisticsListener;
 import com.dml.shuangkou.player.action.da.KedaPaiSolutionsForTipsGenerator;
 import com.dml.shuangkou.player.action.da.KeyaDaPaiDianShuSolutionsGenerator;
 import com.dml.shuangkou.player.action.da.YaPaiSolutionsTipsFilter;
 import com.dml.shuangkou.player.action.da.solution.DianShuZuYaPaiSolutionCalculator;
 import com.dml.shuangkou.player.action.da.solution.ZaDanYaPaiSolutionCalculator;
 import com.dml.shuangkou.player.action.guo.GuoAction;
+import com.dml.shuangkou.player.action.guo.GuoActionStatisticsListener;
 import com.dml.shuangkou.preparedapai.avaliablepai.AvaliablePaiFiller;
 import com.dml.shuangkou.preparedapai.fapai.FapaiStrategy;
 import com.dml.shuangkou.preparedapai.lipai.ShoupaiSortStrategy;
@@ -60,6 +62,14 @@ public class Ju {
 
 	private DianShuZuYaPaiSolutionCalculator dianShuZuYaPaiSolutionCalculator;
 	private ZaDanYaPaiSolutionCalculator zaDanYaPaiSolutionCalculator;
+
+	public void addDaListener(DaActionStatisticsListener daActionStatisticsListener) {
+		actionStatisticsListenerManager.addDaListener(daActionStatisticsListener);
+	}
+
+	public void addGuoListener(GuoActionStatisticsListener guoActionStatisticsListener) {
+		actionStatisticsListenerManager.addGuoListener(guoActionStatisticsListener);
+	}
 
 	public void startFirstPan(List<String> allPlayerIds, long startTime) throws Exception {
 		currentPan = new Pan();

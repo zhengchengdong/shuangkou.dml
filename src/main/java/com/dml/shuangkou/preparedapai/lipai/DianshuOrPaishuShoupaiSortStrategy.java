@@ -102,7 +102,12 @@ public class DianshuOrPaishuShoupaiSortStrategy implements ShoupaiSortStrategy {
 	}
 
 	private int compare(PukePai pai1, PukePai pai2) {
-		return pai1.getPaiMian().compareTo(pai2.getPaiMian());
+		int compare = pai1.getPaiMian().compareTo(pai2.getPaiMian());
+		if (compare == 0) {
+			return pai1.getId() - pai2.getId();
+		} else {
+			return compare;
+		}
 	}
 
 }

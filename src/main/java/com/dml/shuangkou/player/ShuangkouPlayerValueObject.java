@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.dml.puke.pai.PukePai;
+import com.dml.puke.pai.QiShouLiangPaiMark;
+import com.dml.puke.pai.ZuDuiLiangPaiMark;
 import com.dml.puke.wanfa.dianshu.paizu.DianShuZuPaiZu;
 import com.dml.puke.wanfa.position.Position;
 import com.dml.shuangkou.player.action.da.solution.DaPaiDianShuSolution;
@@ -13,6 +15,8 @@ public class ShuangkouPlayerValueObject {
 	private Position position;
 	private boolean couldChaodi;
 	private List<PukePai> allShoupai;
+	private List<PukePai> liangPaiList;
+	private int totalShoupai;
 	private int[] shoupaiDianShuAmountArray;
 	private List<List<Integer>> shoupaiIdListForSortList;
 	private List<DianShuZuPaiZu> lishiDachuPaiZuList;
@@ -29,12 +33,36 @@ public class ShuangkouPlayerValueObject {
 		id = shuangkouPlayer.getId();
 		position = shuangkouPlayer.getPosition();
 		allShoupai = new ArrayList<>(shuangkouPlayer.getAllShoupai().values());
+		liangPaiList = new ArrayList<>();
+		for (PukePai pukePai : allShoupai) {
+			if (pukePai.getMark() != null && pukePai.getMark() instanceof ZuDuiLiangPaiMark
+					|| pukePai.getMark() instanceof QiShouLiangPaiMark) {
+				liangPaiList.add(pukePai);
+			}
+		}
+		totalShoupai = allShoupai.size();
 		shoupaiDianShuAmountArray = shuangkouPlayer.getShoupaiDianShuAmountArray().clone();
 		shoupaiIdListForSortList = new ArrayList<>(shuangkouPlayer.getShoupaiIdListForSortList());
 		lishiDachuPaiZuList = new ArrayList<>(shuangkouPlayer.getLishiDachuPaiZuList());
 		publicDachuPaiZu = shuangkouPlayer.getPublicDachuPaiZu();
 		yaPaiSolutionCandidates = new ArrayList<>(shuangkouPlayer.getYaPaiSolutionCandidates().values());
 		yaPaiSolutionsForTips = new ArrayList<>(shuangkouPlayer.getYaPaiSolutionsForTips());
+	}
+
+	public int getTotalShoupai() {
+		return totalShoupai;
+	}
+
+	public void setTotalShoupai(int totalShoupai) {
+		this.totalShoupai = totalShoupai;
+	}
+
+	public List<PukePai> getLiangPaiList() {
+		return liangPaiList;
+	}
+
+	public void setLiangPaiList(List<PukePai> liangPaiList) {
+		this.liangPaiList = liangPaiList;
 	}
 
 	public String getId() {
