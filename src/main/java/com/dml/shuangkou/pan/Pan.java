@@ -109,6 +109,7 @@ public class Pan {
 		if (playerId.equals(latestDapaiPlayerId)) {
 			shuangkouPlayerIdMajiangPlayerMap.values().forEach((player) -> {
 				player.putPublicDachuPaiZuToLishi();
+				player.setGuo(false);
 			});
 		}
 		daPlayer.da(paiIds, dianshuZuheIdx, waihaoGenerator);
@@ -136,12 +137,12 @@ public class Pan {
 			throw new CanNotGuoException();
 		}
 		player.guo();
-		return new GuoAction();
+		return new GuoAction(player.getId());
 	}
 
 	public void updateNextPlayersDaSolution(DianShuZuYaPaiSolutionCalculator dianShuZuYaPaiCalculator,
 			ZaDanYaPaiSolutionCalculator zaDanYaPaiCalculator) {
-		String dachuPlayerId = positionPlayerIdMap.get(actionPosition);
+		String dachuPlayerId = latestDapaiPlayerId;
 		if (dachuPlayerId != null) {
 			ShuangkouPlayer dachuPlayer = shuangkouPlayerIdMajiangPlayerMap.get(dachuPlayerId);
 			if (dachuPlayer != null) {

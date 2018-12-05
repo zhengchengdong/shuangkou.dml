@@ -1,7 +1,9 @@
 package com.dml.shuangkou.player;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.dml.puke.pai.PukePai;
 import com.dml.puke.pai.QiShouLiangPaiMark;
@@ -13,8 +15,7 @@ import com.dml.shuangkou.player.action.da.solution.DaPaiDianShuSolution;
 public class ShuangkouPlayerValueObject {
 	private String id;
 	private Position position;
-	private boolean couldChaodi;
-	private List<PukePai> allShoupai;
+	private Map<Integer, PukePai> allShoupai;
 	private List<PukePai> liangPaiList;
 	private int totalShoupai;
 	private int[] shoupaiDianShuAmountArray;
@@ -24,6 +25,7 @@ public class ShuangkouPlayerValueObject {
 	// private List<DaPaiDianShuSolution> daPaiSolutionsForTips;
 	private List<DaPaiDianShuSolution> yaPaiSolutionCandidates;
 	private List<DaPaiDianShuSolution> yaPaiSolutionsForTips;
+	private boolean guo;
 
 	public ShuangkouPlayerValueObject() {
 
@@ -32,9 +34,10 @@ public class ShuangkouPlayerValueObject {
 	public ShuangkouPlayerValueObject(ShuangkouPlayer shuangkouPlayer) {
 		id = shuangkouPlayer.getId();
 		position = shuangkouPlayer.getPosition();
-		allShoupai = new ArrayList<>(shuangkouPlayer.getAllShoupai().values());
 		liangPaiList = new ArrayList<>();
-		for (PukePai pukePai : allShoupai) {
+		allShoupai = new HashMap<>();
+		allShoupai.putAll(shuangkouPlayer.getAllShoupai());
+		for (PukePai pukePai : allShoupai.values()) {
 			if (pukePai.getMark() != null && pukePai.getMark() instanceof ZuDuiLiangPaiMark
 					|| pukePai.getMark() instanceof QiShouLiangPaiMark) {
 				liangPaiList.add(pukePai);
@@ -47,6 +50,7 @@ public class ShuangkouPlayerValueObject {
 		publicDachuPaiZu = shuangkouPlayer.getPublicDachuPaiZu();
 		yaPaiSolutionCandidates = new ArrayList<>(shuangkouPlayer.getYaPaiSolutionCandidates().values());
 		yaPaiSolutionsForTips = new ArrayList<>(shuangkouPlayer.getYaPaiSolutionsForTips());
+		guo = shuangkouPlayer.isGuo();
 	}
 
 	public int getTotalShoupai() {
@@ -81,19 +85,11 @@ public class ShuangkouPlayerValueObject {
 		this.position = position;
 	}
 
-	public boolean isCouldChaodi() {
-		return couldChaodi;
-	}
-
-	public void setCouldChaodi(boolean couldChaodi) {
-		this.couldChaodi = couldChaodi;
-	}
-
-	public List<PukePai> getAllShoupai() {
+	public Map<Integer, PukePai> getAllShoupai() {
 		return allShoupai;
 	}
 
-	public void setAllShoupai(List<PukePai> allShoupai) {
+	public void setAllShoupai(Map<Integer, PukePai> allShoupai) {
 		this.allShoupai = allShoupai;
 	}
 
@@ -143,6 +139,14 @@ public class ShuangkouPlayerValueObject {
 
 	public void setYaPaiSolutionsForTips(List<DaPaiDianShuSolution> yaPaiSolutionsForTips) {
 		this.yaPaiSolutionsForTips = yaPaiSolutionsForTips;
+	}
+
+	public boolean isGuo() {
+		return guo;
+	}
+
+	public void setGuo(boolean guo) {
+		this.guo = guo;
 	}
 
 }

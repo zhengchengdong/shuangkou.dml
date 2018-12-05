@@ -53,6 +53,8 @@ public class ShuangkouPlayer {
 	 */
 	private List<DaPaiDianShuSolution> yaPaiSolutionsForTips = new ArrayList<>();
 
+	private boolean guo;// 是否选择"过"
+
 	public void addShouPai(PukePai pukePai) {
 		allShoupai.put(pukePai.getId(), pukePai);
 		int ordinal = pukePai.getPaiMian().dianShu().ordinal();
@@ -109,12 +111,14 @@ public class ShuangkouPlayer {
 			shoupaiDianShuAmountArray[ordinal]--;
 			allShoupai.remove(paiId);
 		}
+		guo = false;
 		yaPaiSolutionCandidates.clear();
 		yaPaiSolutionsForTips.clear();
 		// daPaiSolutionsForTips.clear();
 	}
 
 	public void guo() {
+		guo = true;
 		yaPaiSolutionCandidates.clear();
 		yaPaiSolutionsForTips.clear();
 		// daPaiSolutionsForTips.clear();
@@ -222,6 +226,14 @@ public class ShuangkouPlayer {
 
 	public void setYaPaiSolutionsForTips(List<DaPaiDianShuSolution> yaPaiSolutionsForTips) {
 		this.yaPaiSolutionsForTips = yaPaiSolutionsForTips;
+	}
+
+	public boolean isGuo() {
+		return guo;
+	}
+
+	public void setGuo(boolean guo) {
+		this.guo = guo;
 	}
 
 }
