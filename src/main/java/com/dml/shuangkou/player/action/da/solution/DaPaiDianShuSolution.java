@@ -84,4 +84,24 @@ public class DaPaiDianShuSolution {
 		this.dianshuZuheIdx = dianshuZuheIdx;
 	}
 
+	@Override
+	public int hashCode() {
+		int result = 1;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		DaPaiDianShuSolution other = (DaPaiDianShuSolution) obj;
+		if (!dianshuZuheIdx.equals(other.dianshuZuheIdx))
+			return false;
+		return true;
+	}
+
 }

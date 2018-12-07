@@ -207,6 +207,10 @@ public class Pan {
 			nextPosition = PositionUtil.nextPositionClockwise(nextPosition);
 			yapaiPlayerId = positionPlayerIdMap.get(nextPosition);
 		}
+		ShuangkouPlayer yapaiPlayer = shuangkouPlayerIdMajiangPlayerMap.get(yapaiPlayerId);
+		if (yapaiPlayer != null) {
+			yapaiPlayer.putPublicDachuPaiZuToLishi();
+		}
 		actionPosition = nextPosition;
 	}
 

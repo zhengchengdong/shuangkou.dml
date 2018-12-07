@@ -96,9 +96,9 @@ public class ShuangkouPlayer {
 			throw new DaPaiException();
 		}
 
-		if (publicDachuPaiZu != null) {
-			lishiDachuPaiZuList.add(publicDachuPaiZu);
-		}
+		// if (publicDachuPaiZu != null) {
+		// lishiDachuPaiZuList.add(publicDachuPaiZu);
+		// }
 		DianShuZuPaiZu newPublicDachuPaiZu = new DianShuZuPaiZu();
 		newPublicDachuPaiZu.setDianShuZu(solution.getDianShuZu());
 		newPublicDachuPaiZu.setPaiArray(paiArray);
@@ -118,6 +118,7 @@ public class ShuangkouPlayer {
 	}
 
 	public void guo() {
+		// putPublicDachuPaiZuToLishi();
 		guo = true;
 		yaPaiSolutionCandidates.clear();
 		yaPaiSolutionsForTips.clear();

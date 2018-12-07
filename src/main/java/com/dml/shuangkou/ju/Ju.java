@@ -105,11 +105,11 @@ public class Ju {
 
 	public void startNextPan() throws Exception {
 		actionStatisticsListenerManager.updateListenersForNextPan();
-		Pan nextPan = new Pan();
-		nextPan.setNo(countFinishedPan() + 1);
+		currentPan = new Pan();
+		currentPan.setNo(countFinishedPan() + 1);
 		PanResult latestFinishedPanResult = findLatestFinishedPanResult();
 		List<String> allPlayerIds = latestFinishedPanResult.allPlayerIds();
-		allPlayerIds.forEach((pid) -> nextPan.addPlayer(pid));
+		allPlayerIds.forEach((pid) -> currentPan.addPlayer(pid));
 
 		avaliablePaiFiller.fillAvaliablePai(this);
 

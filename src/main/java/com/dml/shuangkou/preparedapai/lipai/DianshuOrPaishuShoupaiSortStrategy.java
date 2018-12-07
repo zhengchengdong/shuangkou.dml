@@ -1,6 +1,7 @@
 package com.dml.shuangkou.preparedapai.lipai;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -8,6 +9,7 @@ import java.util.TreeMap;
 
 import com.dml.puke.pai.DianShu;
 import com.dml.puke.pai.PukePai;
+import com.dml.puke.pai.PukePaiMian;
 
 /**
  * 以点数、牌数为主次的理牌策略
@@ -30,25 +32,26 @@ public class DianshuOrPaishuShoupaiSortStrategy implements ShoupaiSortStrategy {
 		for (PukePai pukePai : dianshuSortList) {
 			dianshuSort.add(pukePai.getId());
 		}
+		Collections.reverse(dianshuSort);
 		// 以牌数为主的理牌
 		List<Integer> zhangshuSort = new ArrayList<>();
 		sortlists.add(zhangshuSort);
-		Map<Integer, List<PukePai>> numberGroupMap = new TreeMap<>();
-		List<PukePai> yiZhangList = new LinkedList<>();
+		Map<Integer, LinkedList<PukePai>> numberGroupMap = new TreeMap<>();
+		LinkedList<PukePai> yiZhangList = new LinkedList<>();
 		numberGroupMap.put(1, yiZhangList);
-		List<PukePai> erZhangList = new LinkedList<>();
+		LinkedList<PukePai> erZhangList = new LinkedList<>();
 		numberGroupMap.put(2, erZhangList);
-		List<PukePai> sanZhangList = new LinkedList<>();
+		LinkedList<PukePai> sanZhangList = new LinkedList<>();
 		numberGroupMap.put(3, sanZhangList);
-		List<PukePai> siZhangList = new LinkedList<>();
+		LinkedList<PukePai> siZhangList = new LinkedList<>();
 		numberGroupMap.put(4, siZhangList);
-		List<PukePai> wuZhangList = new LinkedList<>();
+		LinkedList<PukePai> wuZhangList = new LinkedList<>();
 		numberGroupMap.put(5, wuZhangList);
-		List<PukePai> liuZhangList = new LinkedList<>();
+		LinkedList<PukePai> liuZhangList = new LinkedList<>();
 		numberGroupMap.put(6, liuZhangList);
-		List<PukePai> qiZhangList = new LinkedList<>();
+		LinkedList<PukePai> qiZhangList = new LinkedList<>();
 		numberGroupMap.put(7, qiZhangList);
-		List<PukePai> baZhangList = new LinkedList<>();
+		LinkedList<PukePai> baZhangList = new LinkedList<>();
 		numberGroupMap.put(8, baZhangList);
 		List<PukePai> temList = new ArrayList<>();
 		DianShu dianshu = null;
@@ -72,11 +75,22 @@ public class DianshuOrPaishuShoupaiSortStrategy implements ShoupaiSortStrategy {
 		for (PukePai pai : temList) {
 			addPukePai(zhangshuList, pai);
 		}
+		LinkedList<PukePai> wangpaiList = new LinkedList<>();
 		for (List<PukePai> zhangshuList1 : numberGroupMap.values()) {
 			for (PukePai pukePai : zhangshuList1) {
-				zhangshuSort.add(pukePai.getId());
+				if (pukePai.getPaiMian().equals(PukePaiMian.dawang)) {
+					wangpaiList.addLast(pukePai);
+				} else if (pukePai.getPaiMian().equals(PukePaiMian.xiaowang)) {
+					wangpaiList.addFirst(pukePai);
+				} else {
+					zhangshuSort.add(pukePai.getId());
+				}
 			}
 		}
+		for (PukePai pukePai : wangpaiList) {
+			zhangshuSort.add(pukePai.getId());
+		}
+		Collections.reverse(zhangshuSort);
 		return sortlists;
 	}
 
