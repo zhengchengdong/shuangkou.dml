@@ -211,7 +211,7 @@ public class Pan {
 		if (yapaiPlayer != null) {
 			yapaiPlayer.putPublicDachuPaiZuToLishi();
 		}
-		actionPosition = nextPosition;
+		actionPosition = yapaiPlayer.getPosition();
 	}
 
 	public ShuangkouPlayer findPlayer(String dapaiPlayerId) {
@@ -223,8 +223,8 @@ public class Pan {
 		if (player == null) {
 			return null;
 		}
-		Position nextPosition = PositionUtil.nextPositionAntiClockwise(player.getPosition());
-		nextPosition = PositionUtil.nextPositionAntiClockwise(nextPosition);
+		Position nextPosition = PositionUtil.nextPositionClockwise(player.getPosition());
+		nextPosition = PositionUtil.nextPositionClockwise(nextPosition);
 		String duijiaPlayerId = positionPlayerIdMap.get(nextPosition);
 		if (duijiaPlayerId == null) {
 			return null;
@@ -233,10 +233,10 @@ public class Pan {
 	}
 
 	public String nextPlayerId() {
-		Position nextPosition = PositionUtil.nextPositionAntiClockwise(actionPosition);
+		Position nextPosition = PositionUtil.nextPositionClockwise(actionPosition);
 		String yapaiPlayerId = positionPlayerIdMap.get(nextPosition);
 		while ((yapaiPlayerId == null || !ifPlayerHasPai(yapaiPlayerId)) && !nextPosition.equals(actionPosition)) {// //打完牌了，有可能死循环
-			nextPosition = PositionUtil.nextPositionAntiClockwise(nextPosition);
+			nextPosition = PositionUtil.nextPositionClockwise(nextPosition);
 			yapaiPlayerId = positionPlayerIdMap.get(nextPosition);
 		}
 		return yapaiPlayerId;
