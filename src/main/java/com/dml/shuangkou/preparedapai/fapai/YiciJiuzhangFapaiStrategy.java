@@ -19,14 +19,30 @@ public class YiciJiuzhangFapaiStrategy implements FapaiStrategy {
 	@Override
 	public void fapai(Ju ju) throws Exception {
 		Pan currentPan = ju.getCurrentPan();
+		List<String> playerIds = currentPan.getAllPlayerId();
 		List<PukePai> avaliablePaiList = currentPan.getAvaliablePaiList();
 		Map<String, ShuangkouPlayer> shuangkouPlayerIdMajiangPlayerMap = currentPan
 				.getShuangkouPlayerIdMajiangPlayerMap();
-		for (int i = 0; i < 3; i++) {
-			for (ShuangkouPlayer player : shuangkouPlayerIdMajiangPlayerMap.values()) {
-				for (int j = 0; j < 9; j++) {
-					PukePai pukePai = avaliablePaiList.remove(0);
-					player.addShouPai(pukePai);
+		if (playerIds.size() > 2) {// 4人
+			for (int i = 0; i < 3; i++) {
+				for (ShuangkouPlayer player : shuangkouPlayerIdMajiangPlayerMap.values()) {
+					for (int j = 0; j < 9; j++) {
+						PukePai pukePai = avaliablePaiList.remove(0);
+						player.addShouPai(pukePai);
+					}
+				}
+			}
+		} else {// 2人
+			for (int i = 0; i < 3; i++) {
+				for (String playerId : playerIds) {
+					ShuangkouPlayer player = shuangkouPlayerIdMajiangPlayerMap.get(playerId);
+					for (int j = 0; j < 9; j++) {
+						PukePai pukePai = avaliablePaiList.remove(0);
+						player.addShouPai(pukePai);
+					}
+					for (int j = 0; j < 9; j++) {
+						avaliablePaiList.remove(0);
+					}
 				}
 			}
 		}

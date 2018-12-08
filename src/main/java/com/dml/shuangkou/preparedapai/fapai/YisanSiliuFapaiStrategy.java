@@ -19,20 +19,36 @@ public class YisanSiliuFapaiStrategy implements FapaiStrategy {
 	@Override
 	public void fapai(Ju ju) throws Exception {
 		Pan currentPan = ju.getCurrentPan();
+		List<String> playerIds = currentPan.getAllPlayerId();
 		List<PukePai> avaliablePaiList = currentPan.getAvaliablePaiList();
 		Map<String, ShuangkouPlayer> shuangkouPlayerIdMajiangPlayerMap = currentPan
 				.getShuangkouPlayerIdMajiangPlayerMap();
-		fapai(avaliablePaiList, shuangkouPlayerIdMajiangPlayerMap, 1, 3);
-		fapai(avaliablePaiList, shuangkouPlayerIdMajiangPlayerMap, 4, 6);
+		fapai(playerIds, avaliablePaiList, shuangkouPlayerIdMajiangPlayerMap, 1, 3);
+		fapai(playerIds, avaliablePaiList, shuangkouPlayerIdMajiangPlayerMap, 4, 6);
 	}
 
-	public void fapai(List<PukePai> avaliablePaiList, Map<String, ShuangkouPlayer> shuangkouPlayerIdMajiangPlayerMap,
-			int m, int n) {
-		for (int i = 0; i < m; i++) {
-			for (ShuangkouPlayer player : shuangkouPlayerIdMajiangPlayerMap.values()) {
-				for (int j = 0; j < n; j++) {
-					PukePai pukePai = avaliablePaiList.remove(0);
-					player.addShouPai(pukePai);
+	public void fapai(List<String> playerIds, List<PukePai> avaliablePaiList,
+			Map<String, ShuangkouPlayer> shuangkouPlayerIdMajiangPlayerMap, int m, int n) {
+		if (playerIds.size() > 2) {// 4人
+			for (int i = 0; i < m; i++) {
+				for (ShuangkouPlayer player : shuangkouPlayerIdMajiangPlayerMap.values()) {
+					for (int j = 0; j < n; j++) {
+						PukePai pukePai = avaliablePaiList.remove(0);
+						player.addShouPai(pukePai);
+					}
+				}
+			}
+		} else {// 2人
+			for (int i = 0; i < m; i++) {
+				for (String playerId : playerIds) {
+					ShuangkouPlayer player = shuangkouPlayerIdMajiangPlayerMap.get(playerId);
+					for (int j = 0; j < n; j++) {
+						PukePai pukePai = avaliablePaiList.remove(0);
+						player.addShouPai(pukePai);
+					}
+					for (int j = 0; j < n; j++) {
+						avaliablePaiList.remove(0);
+					}
 				}
 			}
 		}
