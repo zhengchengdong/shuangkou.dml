@@ -45,6 +45,7 @@ public class LastPanChuPaiOrdinalLuanpaiStrategy implements LuanpaiStrategy {
 				}
 				if (!remove) {
 					tempPaiList.add(pukePai);
+					break;
 				}
 			}
 		}
