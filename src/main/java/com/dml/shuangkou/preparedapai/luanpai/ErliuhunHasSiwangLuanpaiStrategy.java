@@ -9,9 +9,9 @@ import java.util.Map;
 import java.util.Random;
 
 import com.dml.puke.pai.PukePai;
-import com.dml.shuangkou.BianXingWanFa;
 import com.dml.shuangkou.ju.Ju;
 import com.dml.shuangkou.pan.Pan;
+import com.dml.shuangkou.wanfa.BianXingWanFa;
 
 /**
  * 有四个王的2-6混插牌策略

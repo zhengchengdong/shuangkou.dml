@@ -172,9 +172,8 @@ public class Ju {
 		GuoAction guoAction = currentPan.guo(playerId);
 		actionStatisticsListenerManager.updateGuoActionListener(guoAction, this);
 		// 看下一人是否是最后出牌人
-		String nextPlayerId = currentPan.nextPlayerId();
-		if (nextPlayerId.equals(currentPan.getLatestDapaiPlayerId())) {// 下一人是最后出牌人
-			ShuangkouPlayer nextPlayer = currentPan.findPlayer(nextPlayerId);
+		if (currentPan.ifStartYapai()) {// 下一人是最后出牌人
+			ShuangkouPlayer nextPlayer = currentPan.findNextActionPlayer();
 			nextPlayer.putYaPaiSolutionCandidates(
 					allKedaPaiSolutionsGenerator.generateAllKedaPaiSolutions(nextPlayer.getAllShoupai()));
 
@@ -183,7 +182,7 @@ public class Ju {
 
 			// 划起提示
 			// nextPlayer.generateDaPaiSolutionsForTips(kedaPaiSolutionsForTipsGenerator);
-
+			currentPan.setChuifeng(false);
 		} else {
 			// 生成下家的候选方案。
 			currentPan.updateNextPlayersDaSolution(dianShuZuYaPaiSolutionCalculator, zaDanYaPaiSolutionCalculator);

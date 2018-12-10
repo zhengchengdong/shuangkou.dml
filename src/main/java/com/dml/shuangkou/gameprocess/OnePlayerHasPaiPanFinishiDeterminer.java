@@ -4,9 +4,10 @@ import java.util.List;
 
 import com.dml.shuangkou.ju.Ju;
 import com.dml.shuangkou.pan.Pan;
+import com.dml.shuangkou.player.ShuangkouPlayer;
 
 /**
- * 如果最多只有一个人手上有牌，一盘结束
+ * 一队的两个人都打完牌或者只剩一人手上有牌，一盘结束
  * 
  * @author lsc
  *
@@ -16,14 +17,15 @@ public class OnePlayerHasPaiPanFinishiDeterminer implements CurrentPanFinishiDet
 	@Override
 	public boolean determineToFinishCurrentPan(Ju ju) {
 		Pan currentPan = ju.getCurrentPan();
-		List<String> playerIds = currentPan.getAllPlayerId();
-		int remain = 0;
+		List<String> playerIds = currentPan.getNoPaiPlayerIdList();
 		for (String playerId : playerIds) {
-			if (currentPan.ifPlayerHasPai(playerId)) {
-				remain++;
+			ShuangkouPlayer player = currentPan.findDuijiaPlayer(playerId);
+			String duijiaPlayerId = player.getId();
+			if (playerIds.contains(duijiaPlayerId)) {
+				return true;
 			}
 		}
-		if (remain <= 1) {
+		if (currentPan.getAllPlayerId().size() - playerIds.size() <= 1) {
 			return true;
 		}
 		return false;
