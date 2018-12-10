@@ -42,11 +42,11 @@ public class LastPanChuPaiOrdinalLuanpaiStrategy implements LuanpaiStrategy {
 			for (PukePai pukePai1 : removePukePaiList) {
 				if (pukePai1.getId() == pukePai.getId()) {
 					remove = true;
-				}
-				if (!remove) {
-					tempPaiList.add(pukePai);
 					break;
 				}
+			}
+			if (!remove) {
+				tempPaiList.add(pukePai);
 			}
 		}
 		Collections.shuffle(tempPaiList);
