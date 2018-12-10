@@ -1,9 +1,9 @@
 package com.dml.shuangkou.preparedapai.luanpai;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-import com.dml.puke.pai.PaiListValueObject;
 import com.dml.puke.pai.PukePai;
 import com.dml.puke.wanfa.dianshu.paizu.DianShuZuPaiZu;
 import com.dml.shuangkou.ju.Ju;
@@ -26,21 +26,30 @@ public class LastPanChuPaiOrdinalLuanpaiStrategy implements LuanpaiStrategy {
 	public void luanpai(Ju ju) throws Exception {
 		Pan currentPan = ju.getCurrentPan();
 		PanResult lastPanResult = ju.findLatestFinishedPanResult();
-		PaiListValueObject paiListValueObject = lastPanResult.getPan().getPaiListValueObject();
 		List<DianShuZuPaiZu> dachuPaiZuList = lastPanResult.getPan().getDachuPaiZuList();
 		List<PukePai> allPaiList = currentPan.getAvaliablePaiList();
 		List<PukePai> finalPaiList = new ArrayList<>();
-		for (PukePai pukePai : paiListValueObject.getPaiList()) {
-			allPaiList.remove(pukePai.getId());
-		}
-		finalPaiList.addAll(paiListValueObject.getPaiList());
+		List<PukePai> removePukePaiList = new ArrayList<>();
+		List<PukePai> tempPaiList = new ArrayList<>();
 		for (DianShuZuPaiZu paizu : dachuPaiZuList) {
 			for (PukePai pukePai : paizu.getPaiArray()) {
 				finalPaiList.add(pukePai);
-				allPaiList.remove(pukePai.getId());
+				removePukePaiList.add(pukePai);
 			}
 		}
-		finalPaiList.addAll(allPaiList);
+		for (PukePai pukePai : allPaiList) {
+			boolean remove = false;
+			for (PukePai pukePai1 : removePukePaiList) {
+				if (pukePai1.getId() == pukePai.getId()) {
+					remove = true;
+				}
+				if (!remove) {
+					tempPaiList.add(pukePai);
+				}
+			}
+		}
+		Collections.shuffle(tempPaiList);
+		finalPaiList.addAll(tempPaiList);
 		currentPan.setAvaliablePaiList(finalPaiList);
 	}
 
