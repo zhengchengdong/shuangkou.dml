@@ -30,6 +30,9 @@ public class LastPanChuPaiOrdinalLuanpaiStrategy implements LuanpaiStrategy {
 		List<DianShuZuPaiZu> dachuPaiZuList = lastPanResult.getPan().getDachuPaiZuList();
 		List<PukePai> allPaiList = currentPan.getAvaliablePaiList();
 		List<PukePai> finalPaiList = new ArrayList<>();
+		for (PukePai pukePai : paiListValueObject.getPaiList()) {
+			allPaiList.remove(pukePai.getId());
+		}
 		finalPaiList.addAll(paiListValueObject.getPaiList());
 		for (DianShuZuPaiZu paizu : dachuPaiZuList) {
 			for (PukePai pukePai : paizu.getPaiArray()) {
