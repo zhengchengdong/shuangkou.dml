@@ -217,8 +217,7 @@ public class Pan {
 	public ShuangkouPlayer findNextActionPlayer() throws PlayerNotFoundException {
 		Position nextPosition = PositionUtil.nextPositionClockwise(actionPosition);
 		String yapaiPlayerId = positionPlayerIdMap.get(nextPosition);
-		while ((yapaiPlayerId == null || !ifPlayerHasPai(yapaiPlayerId))
-				&& !yapaiPlayerId.equals(latestDapaiPlayerId)) {
+		while (yapaiPlayerId == null || !ifPlayerHasPai(yapaiPlayerId) && !yapaiPlayerId.equals(latestDapaiPlayerId)) {
 			nextPosition = PositionUtil.nextPositionClockwise(nextPosition);
 			yapaiPlayerId = positionPlayerIdMap.get(nextPosition);
 		}
