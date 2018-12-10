@@ -1,7 +1,6 @@
 package com.dml.shuangkou.preparedapai.luanpai;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import com.dml.puke.pai.PaiListValueObject;
@@ -29,12 +28,17 @@ public class LastPanChuPaiOrdinalLuanpaiStrategy implements LuanpaiStrategy {
 		PanResult lastPanResult = ju.findLatestFinishedPanResult();
 		PaiListValueObject paiListValueObject = lastPanResult.getPan().getPaiListValueObject();
 		List<DianShuZuPaiZu> dachuPaiZuList = lastPanResult.getPan().getDachuPaiZuList();
-		List<PukePai> allPaiList = new ArrayList<>();
-		allPaiList.addAll(paiListValueObject.getPaiList());
+		List<PukePai> allPaiList = currentPan.getAvaliablePaiList();
+		List<PukePai> finalPaiList = new ArrayList<>();
+		finalPaiList.addAll(paiListValueObject.getPaiList());
 		for (DianShuZuPaiZu paizu : dachuPaiZuList) {
-			allPaiList.addAll(Arrays.asList(paizu.getPaiArray()));
+			for (PukePai pukePai : paizu.getPaiArray()) {
+				finalPaiList.add(pukePai);
+				allPaiList.remove(pukePai.getId());
+			}
 		}
-		currentPan.setAvaliablePaiList(allPaiList);
+		finalPaiList.addAll(allPaiList);
+		currentPan.setAvaliablePaiList(finalPaiList);
 	}
 
 }
