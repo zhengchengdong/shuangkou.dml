@@ -182,7 +182,9 @@ public class Ju {
 
 			// 划起提示
 			// nextPlayer.generateDaPaiSolutionsForTips(kedaPaiSolutionsForTipsGenerator);
-			currentPan.setChuifeng(false);
+			// currentPan.setChuifeng(false);
+			currentPan.updateActionPositionToNextPlayer();
+			currentPan.setLatestDapaiPlayerId(null);
 		} else {
 			// 生成下家的候选方案。
 			currentPan.updateNextPlayersDaSolution(dianShuZuYaPaiSolutionCalculator, zaDanYaPaiSolutionCalculator);
@@ -190,8 +192,8 @@ public class Ju {
 			currentPan.generateYaPaiSolutionsForTips(yaPaiSolutionsTipsFilter);
 			// 划起提示
 			// currentPan.generateDaPaiSolutionsForTips(kedaPaiSolutionsForTipsGenerator);
+			currentPan.updateActionPositionToNextPlayer();
 		}
-		currentPan.updateActionPositionToNextPlayer();
 		return currentPan.recordPanActionFrame(guoAction, actionTime);
 	}
 

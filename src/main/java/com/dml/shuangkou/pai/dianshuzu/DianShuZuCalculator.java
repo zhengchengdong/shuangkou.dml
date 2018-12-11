@@ -455,6 +455,9 @@ public class DianShuZuCalculator {
 						k++;
 					}
 				}
+				if (k == 2) {
+					continue;
+				}
 				while (k < 2) {
 					dachuDianShuList.add(duiziDianShuZu.getDianShu());
 					k++;
@@ -494,6 +497,9 @@ public class DianShuZuCalculator {
 						k++;
 					}
 				}
+				if (k == 3) {
+					continue;
+				}
 				while (k < 3) {
 					dachuDianShuList.add(sanzhangDianShuZu.getDianShu());
 					k++;
@@ -532,6 +538,9 @@ public class DianShuZuCalculator {
 						dachuDianShuList.addAll(Arrays.asList(pai.getAllYuanPai()));
 						k++;
 					}
+				}
+				if (k == zhadanDianShuZu.getSize()) {
+					continue;
 				}
 				while (k < zhadanDianShuZu.getSize()) {
 					dachuDianShuList.add(zhadanDianShuZu.getDianShu());
@@ -750,6 +759,19 @@ public class DianShuZuCalculator {
 				List<DianShu> dachuDianShuList = new ArrayList<>();
 				Map<DianShu, Integer> dianshuCountMap = new HashMap<>();
 				DianShu[] lianXuDianShuArray = lianXuZhadanDianShuZu.getLianXuDianShuArray();
+				int[] lianXuDianShuSizeArray = lianXuZhadanDianShuZu.getLianXuDianShuSizeArray();
+				double avg = 0;
+				int max = 0;
+				for (int xian = 0; xian < lianXuDianShuSizeArray.length; xian++) {
+					avg += lianXuDianShuSizeArray[xian];
+					if (lianXuDianShuSizeArray[xian] > max) {
+						max = lianXuDianShuSizeArray[xian];
+					}
+				}
+				avg = avg / lianXuDianShuArray.length;
+				if (avg - max >= 1) {
+					continue;
+				}
 				for (DianShu dianshu : lianXuDianShuArray) {
 					for (int i = 0; i < zuhe.length; i++) {
 						if (zuhe[i] == 1 && dianshu.equals(keYongList.get(i).getDangPaiType())) {
@@ -764,7 +786,6 @@ public class DianShuZuCalculator {
 						}
 					}
 				}
-				int[] lianXuDianShuSizeArray = lianXuZhadanDianShuZu.getLianXuDianShuSizeArray();
 				for (int i = 0; i < lianXuDianShuSizeArray.length; i++) {
 					int size = lianXuDianShuSizeArray[i];
 					if (i > lianXuDianShuArray.length - 1) {
@@ -823,13 +844,17 @@ public class DianShuZuCalculator {
 		return lianXuZhadanList;
 	}
 
-	private static List<WangZhadanDianShuZu> generateAllWangZhadanDianShuZu(int[] dianShuAmountArray) {
+	public static List<WangZhadanDianShuZu> generateAllWangZhadanDianShuZu(int[] dianShuAmountArray) {
 		List<WangZhadanDianShuZu> wangZhadanList = new ArrayList<>();
 		int xiaowangCount = dianShuAmountArray[13];
 		int dawangCount = dianShuAmountArray[14];
-		if (xiaowangCount + dawangCount >= 3) {
-			WangZhadanDianShuZu angZhadan = new WangZhadanDianShuZu(xiaowangCount, dawangCount);
-			wangZhadanList.add(angZhadan);
+		for (int i = 0; i < xiaowangCount; i++) {
+			for (int j = 0; j < dawangCount; j++) {
+				if (i + j >= 3) {
+					WangZhadanDianShuZu angZhadan = new WangZhadanDianShuZu(i, j);
+					wangZhadanList.add(angZhadan);
+				}
+			}
 		}
 		return wangZhadanList;
 	}
