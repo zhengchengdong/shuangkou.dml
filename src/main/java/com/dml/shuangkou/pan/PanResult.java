@@ -2,12 +2,17 @@ package com.dml.shuangkou.pan;
 
 import java.util.List;
 
+import com.dml.puke.wanfa.position.Position;
 import com.dml.shuangkou.player.ShuangkouPlayerValueObject;
 
 public abstract class PanResult {
 
 	private long panFinishTime;
 	private PanValueObject pan;
+
+	public Position playerPosition(String playerId) {
+		return pan.playerPosition(playerId);
+	}
 
 	public List<String> allPlayerIds() {
 		return pan.allPlayerIds();

@@ -10,6 +10,7 @@ import com.dml.puke.pai.ZuDuiLiangPaiMark;
 import com.dml.puke.wanfa.position.Position;
 import com.dml.shuangkou.ju.Ju;
 import com.dml.shuangkou.pan.Pan;
+import com.dml.shuangkou.pan.PanResult;
 import com.dml.shuangkou.player.ShuangkouPlayer;
 
 /**
@@ -50,20 +51,41 @@ public class HongxinbaHongxinjiuZuduiStrategy implements ZuduiStrategy {
 		}
 		currentPan.updatePlayerPosition(qishouPlayerId, Position.dong);
 		playerIdList.remove(qishouPlayerId);
-		if (qishouPlayerId.equals(duijiaPlayerId)) {
-			while (!playerIdList.isEmpty()) {
-				String playerId = playerIdList.remove(0);
-				Position position = pList.remove(0);
-				currentPan.updatePlayerPosition(playerId, position);
+		if (currentPan.getNo() == 1) {
+			if (qishouPlayerId.equals(duijiaPlayerId)) {
+				while (!playerIdList.isEmpty()) {
+					String playerId = playerIdList.remove(0);
+					Position position = pList.remove(0);
+					currentPan.updatePlayerPosition(playerId, position);
+				}
+			} else {
+				currentPan.updatePlayerPosition(duijiaPlayerId, Position.xi);
+				playerIdList.remove(duijiaPlayerId);
+				pList.remove(Position.xi);
+				while (!playerIdList.isEmpty()) {
+					String playerId = playerIdList.remove(0);
+					Position position = pList.remove(0);
+					currentPan.updatePlayerPosition(playerId, position);
+				}
 			}
 		} else {
-			currentPan.updatePlayerPosition(duijiaPlayerId, Position.xi);
-			playerIdList.remove(duijiaPlayerId);
-			pList.remove(Position.xi);
-			while (!playerIdList.isEmpty()) {
-				String playerId = playerIdList.remove(0);
-				Position position = pList.remove(0);
-				currentPan.updatePlayerPosition(playerId, position);
+			if (qishouPlayerId.equals(duijiaPlayerId)) {
+				PanResult latestFinishedPanResult = ju.findLatestFinishedPanResult();
+				// 最后给所有玩家设置门风
+				List<String> allPlayerIds = latestFinishedPanResult.allPlayerIds();
+				for (String playerId : allPlayerIds) {
+					Position playerPosition = latestFinishedPanResult.playerPosition(playerId);
+					currentPan.updatePlayerPosition(playerId, playerPosition);
+				}
+			} else {
+				currentPan.updatePlayerPosition(duijiaPlayerId, Position.xi);
+				playerIdList.remove(duijiaPlayerId);
+				pList.remove(Position.xi);
+				while (!playerIdList.isEmpty()) {
+					String playerId = playerIdList.remove(0);
+					Position position = pList.remove(0);
+					currentPan.updatePlayerPosition(playerId, position);
+				}
 			}
 		}
 	}

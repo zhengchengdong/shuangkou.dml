@@ -1,7 +1,9 @@
 package com.dml.shuangkou.pan;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.dml.puke.pai.PaiListValueObject;
 import com.dml.puke.wanfa.dianshu.paizu.DianShuZuPaiZu;
@@ -12,6 +14,7 @@ public class PanValueObject {
 	private int no;
 	private List<ShuangkouPlayerValueObject> shuangkouPlayerList;
 	private PaiListValueObject paiListValueObject;
+	private Map<Position, String> positionPlayerIdMap;
 	private List<DianShuZuPaiZu> dachuPaiZuList;
 	private Position actionPosition;
 	private String latestDapaiPlayerId;
@@ -25,6 +28,7 @@ public class PanValueObject {
 		pan.getShuangkouPlayerIdMajiangPlayerMap().values()
 				.forEach((shuangkouPlayer) -> shuangkouPlayerList.add(new ShuangkouPlayerValueObject(shuangkouPlayer)));
 		paiListValueObject = new PaiListValueObject(pan.getAvaliablePaiList());
+		positionPlayerIdMap = new HashMap<>(pan.getPositionPlayerIdMap());
 		dachuPaiZuList = new ArrayList<>(pan.getDachuPaiZuList());
 		actionPosition = pan.getActionPosition();
 		latestDapaiPlayerId = pan.getLatestDapaiPlayerId();
@@ -38,6 +42,15 @@ public class PanValueObject {
 		return list;
 	}
 
+	public Position playerPosition(String playerId) {
+		for (ShuangkouPlayerValueObject player : shuangkouPlayerList) {
+			if (player.getId().equals(playerId)) {
+				return player.getPosition();
+			}
+		}
+		return null;
+	}
+
 	public ShuangkouPlayerValueObject findPlayer(String playerId) {
 		for (ShuangkouPlayerValueObject player : shuangkouPlayerList) {
 			if (player.getId().equals(playerId)) {
@@ -45,6 +58,14 @@ public class PanValueObject {
 			}
 		}
 		return null;
+	}
+
+	public Map<Position, String> getPositionPlayerIdMap() {
+		return positionPlayerIdMap;
+	}
+
+	public void setPositionPlayerIdMap(Map<Position, String> positionPlayerIdMap) {
+		this.positionPlayerIdMap = positionPlayerIdMap;
 	}
 
 	public int getNo() {

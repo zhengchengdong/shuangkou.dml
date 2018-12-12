@@ -271,6 +271,11 @@ public class Pan {
 		if (chuifeng) {// 吹风
 			nextPosition = PositionUtil.nextPositionClockwise(actionPosition);
 			yapaiPlayerId = positionPlayerIdMap.get(nextPosition);
+			while (yapaiPlayerId == null
+					|| !ifPlayerHasPai(yapaiPlayerId) && !yapaiPlayerId.equals(latestDapaiPlayerId)) {
+				nextPosition = PositionUtil.nextPositionClockwise(nextPosition);
+				yapaiPlayerId = positionPlayerIdMap.get(nextPosition);
+			}
 			String playerId = noPaiPlayerIdList.get(noPaiPlayerIdList.size() - 1);
 			if (playerId.equals(yapaiPlayerId)) {
 				return true;
