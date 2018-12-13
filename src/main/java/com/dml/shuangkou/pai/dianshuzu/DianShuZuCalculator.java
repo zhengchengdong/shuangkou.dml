@@ -593,16 +593,20 @@ public class DianShuZuCalculator {
 						}
 					}
 				}
+				int danzhang = 0;// 如果只有一个单张的顺子，说明其余四张由王代替，这种情况不能作为顺子
 				for (DianShu dianshu : shunziDianShuZu.getLianXuDianShuArray()) {
 					Integer count = dianshuCountMap.get(dianshu);
 					if (count == null) {
 						dachuDianShuList.add(dianshu);
+						danzhang++;
 					}
 				}
 				dachuDianShuList = dianshuSort(dachuDianShuList, 1);
 				solution.setDachuDianShuArray(dachuDianShuList.toArray(new DianShu[dachuDianShuList.size()]));
 				solution.calculateDianshuZuheIdx();
-				solutionList.add(solution);
+				if (danzhang > 1) {
+					solutionList.add(solution);
+				}
 			}
 		}
 		return solutionList;
@@ -887,16 +891,47 @@ public class DianShuZuCalculator {
 				}
 			}
 		}
-
 		if (!sortDianShuList.isEmpty() && !wangDianShuList.isEmpty()) {
-			for (int k = 0; k < sortDianShuList.size() - size; k++) {
-				DianShu dianshu1 = sortDianShuList.get(k);
-				DianShu dianshu2 = sortDianShuList.get(k + size);
-				if (dianshu2.ordinal() - dianshu1.ordinal() > 1) {
-					finalDianShuList.add(wangDianShuList.remove(0));
+			int zhangshu = 0;
+			DianShu nextDianshu = null;
+			for (int k = 0; k < sortDianShuList.size(); k++) {
+				DianShu dianshu = sortDianShuList.get(k);
+				if (nextDianshu != null) {
+					if (dianshu.equals(nextDianshu)) {
+						finalDianShuList.add(dianshu);
+						zhangshu++;
+						if (zhangshu < size) {
+							nextDianshu = dianshu;
+
+						} else {
+							nextDianshu = DianShu.getDianShuByOrdinal(nextDianshu.ordinal() + 1);
+							zhangshu = 0;
+						}
+					} else {
+						finalDianShuList.add(wangDianShuList.remove(0));
+						k -= 1;
+						zhangshu++;
+						if (zhangshu < size) {
+
+						} else {
+							nextDianshu = DianShu.getDianShuByOrdinal(nextDianshu.ordinal() + 1);
+							zhangshu = 0;
+						}
+					}
+				} else {
+					finalDianShuList.add(dianshu);
+					zhangshu++;
+					if (zhangshu < size) {
+						nextDianshu = dianshu;
+
+					} else {
+						nextDianshu = DianShu.getDianShuByOrdinal(dianshu.ordinal() + 1);
+						zhangshu = 0;
+					}
 				}
-				finalDianShuList.add(dianshu1);
-				finalDianShuList.add(dianshu2);
+			}
+			while (!wangDianShuList.isEmpty()) {
+				finalDianShuList.add(wangDianShuList.remove(0));
 			}
 		}
 		return finalDianShuList;
