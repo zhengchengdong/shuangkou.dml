@@ -137,7 +137,8 @@ public class ShuangkouPlayer {
 	}
 
 	public void generateYaPaiSolutionsForTips(YaPaiSolutionsTipsFilter yaPaiSolutionsTipsFilter) {
-		yaPaiSolutionsForTips = yaPaiSolutionsTipsFilter.filter(new ArrayList<>(yaPaiSolutionCandidates.values()));
+		yaPaiSolutionsForTips = yaPaiSolutionsTipsFilter.filter(new ArrayList<>(yaPaiSolutionCandidates.values()),
+				allShoupai);
 	}
 
 	public void generateDaPaiSolutionsForTips(KedaPaiSolutionsForTipsGenerator kedaPaiSolutionsForTipsGenerator) {

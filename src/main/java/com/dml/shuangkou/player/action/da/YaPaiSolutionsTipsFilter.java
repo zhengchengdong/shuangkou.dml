@@ -1,7 +1,9 @@
 package com.dml.shuangkou.player.action.da;
 
 import java.util.List;
+import java.util.Map;
 
+import com.dml.puke.pai.PukePai;
 import com.dml.shuangkou.player.action.da.solution.DaPaiDianShuSolution;
 
 /**
@@ -11,5 +13,6 @@ import com.dml.shuangkou.player.action.da.solution.DaPaiDianShuSolution;
  *
  */
 public interface YaPaiSolutionsTipsFilter {
-	public List<DaPaiDianShuSolution> filter(List<DaPaiDianShuSolution> YaPaiSolutions);
+	public List<DaPaiDianShuSolution> filter(List<DaPaiDianShuSolution> YaPaiSolutions,
+			Map<Integer, PukePai> allShoupai);
 }
