@@ -1,6 +1,7 @@
 package com.dml.shuangkou.player.action.da.solution;
 
 import java.math.BigInteger;
+import java.util.Arrays;
 
 import com.dml.puke.pai.DianShu;
 import com.dml.puke.wanfa.dianshu.dianshuzu.DianShuZu;
@@ -99,7 +100,17 @@ public class DaPaiDianShuSolution {
 		if (getClass() != obj.getClass())
 			return false;
 		DaPaiDianShuSolution other = (DaPaiDianShuSolution) obj;
-		if (!dianshuZuheIdx.equals(other.dianshuZuheIdx))
+		if (!Arrays.equals(dachuDianShuArray, other.dachuDianShuArray))
+			return false;
+		if (dianShuZu == null) {
+			if (other.dianShuZu != null)
+				return false;
+		} else if (!dianShuZu.equals(other.dianShuZu))
+			return false;
+		if (dianshuZuheIdx == null) {
+			if (other.dianshuZuheIdx != null)
+				return false;
+		} else if (!dianshuZuheIdx.equals(other.dianshuZuheIdx))
 			return false;
 		return true;
 	}

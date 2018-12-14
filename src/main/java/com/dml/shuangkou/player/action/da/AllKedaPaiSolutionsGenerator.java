@@ -1,6 +1,5 @@
 package com.dml.shuangkou.player.action.da;
 
-import java.util.List;
 import java.util.Map;
 
 import com.dml.puke.pai.PukePai;
@@ -13,5 +12,5 @@ import com.dml.shuangkou.player.action.da.solution.DaPaiDianShuSolution;
  *
  */
 public interface AllKedaPaiSolutionsGenerator {
-	public List<DaPaiDianShuSolution> generateAllKedaPaiSolutions(Map<Integer, PukePai> allShoupai);
+	public Map<String, DaPaiDianShuSolution> generateAllKedaPaiSolutions(Map<Integer, PukePai> allShoupai);
 }

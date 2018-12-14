@@ -1,6 +1,6 @@
 package com.dml.shuangkou.player.action.da.solution;
 
-import java.util.List;
+import java.util.Map;
 
 import com.dml.puke.wanfa.dianshu.dianshuzu.DianShuZu;
 
@@ -11,5 +11,5 @@ import com.dml.puke.wanfa.dianshu.dianshuzu.DianShuZu;
  *
  */
 public interface DianShuZuYaPaiSolutionCalculator {
-	public List<DaPaiDianShuSolution> calculate(DianShuZu beiYaDianShuZu, int[] dianShuAmountArray);
+	public Map<String, DaPaiDianShuSolution> calculate(DianShuZu beiYaDianShuZu, int[] dianShuAmountArray);
 }

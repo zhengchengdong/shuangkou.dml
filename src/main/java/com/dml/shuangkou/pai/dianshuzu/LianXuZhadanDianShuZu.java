@@ -1,5 +1,7 @@
 package com.dml.shuangkou.pai.dianshuzu;
 
+import java.util.Arrays;
+
 import com.dml.puke.pai.DianShu;
 import com.dml.puke.wanfa.dianshu.dianshuzu.ZhadanDianShuZu;
 
@@ -65,6 +67,22 @@ public class LianXuZhadanDianShuZu extends ZhadanDianShuZu {
 
 	public void setLianXuDianShuSizeArray(int[] lianXuDianShuSizeArray) {
 		this.lianXuDianShuSizeArray = lianXuDianShuSizeArray;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		LianXuZhadanDianShuZu other = (LianXuZhadanDianShuZu) obj;
+		if (!Arrays.equals(lianXuDianShuArray, other.lianXuDianShuArray))
+			return false;
+		if (!Arrays.equals(lianXuDianShuSizeArray, other.lianXuDianShuSizeArray))
+			return false;
+		return true;
 	}
 
 }

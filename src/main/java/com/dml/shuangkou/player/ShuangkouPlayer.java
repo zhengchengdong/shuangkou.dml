@@ -61,8 +61,8 @@ public class ShuangkouPlayer {
 		shoupaiDianShuAmountArray[ordinal]++;
 	}
 
-	public void putYaPaiSolutionCandidates(List<DaPaiDianShuSolution> solutions) {
-		solutions.forEach((solution) -> yaPaiSolutionCandidates.put(solution.getDianshuZuheIdx(), solution));
+	public void putYaPaiSolutionCandidates(Map<String, DaPaiDianShuSolution> solutionMap) {
+		yaPaiSolutionCandidates.putAll(solutionMap);
 	}
 
 	public List<DaPaiDianShuSolution> takeYaPaiSolutionCandidates() {
@@ -132,8 +132,8 @@ public class ShuangkouPlayer {
 		}
 	}
 
-	public void addDaPaiDianShuSolutions(List<DaPaiDianShuSolution> solutions) {
-		solutions.forEach((solution) -> yaPaiSolutionCandidates.put(solution.getDianshuZuheIdx(), solution));
+	public void addDaPaiDianShuSolutions(Map<String, DaPaiDianShuSolution> solutionMap) {
+		yaPaiSolutionCandidates.putAll(solutionMap);
 	}
 
 	public void generateYaPaiSolutionsForTips(YaPaiSolutionsTipsFilter yaPaiSolutionsTipsFilter) {

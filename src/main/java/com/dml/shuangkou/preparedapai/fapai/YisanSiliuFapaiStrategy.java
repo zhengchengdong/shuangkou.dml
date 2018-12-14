@@ -1,5 +1,6 @@
 package com.dml.shuangkou.preparedapai.fapai;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -21,13 +22,15 @@ public class YisanSiliuFapaiStrategy implements FapaiStrategy {
 		Pan currentPan = ju.getCurrentPan();
 		List<String> playerIds = currentPan.getAllPlayerId();
 		List<PukePai> avaliablePaiList = currentPan.getAvaliablePaiList();
+		List<PukePai> remainPaiList = new ArrayList<>();
 		Map<String, ShuangkouPlayer> shuangkouPlayerIdMajiangPlayerMap = currentPan
 				.getShuangkouPlayerIdMajiangPlayerMap();
-		fapai(playerIds, avaliablePaiList, shuangkouPlayerIdMajiangPlayerMap, 1, 3);
-		fapai(playerIds, avaliablePaiList, shuangkouPlayerIdMajiangPlayerMap, 4, 6);
+		fapai(playerIds, avaliablePaiList, remainPaiList, shuangkouPlayerIdMajiangPlayerMap, 1, 3);
+		fapai(playerIds, avaliablePaiList, remainPaiList, shuangkouPlayerIdMajiangPlayerMap, 4, 6);
+		avaliablePaiList.addAll(remainPaiList);
 	}
 
-	public void fapai(List<String> playerIds, List<PukePai> avaliablePaiList,
+	public void fapai(List<String> playerIds, List<PukePai> avaliablePaiList, List<PukePai> remainPaiList,
 			Map<String, ShuangkouPlayer> shuangkouPlayerIdMajiangPlayerMap, int m, int n) {
 		if (playerIds.size() > 2) {// 4人
 			for (int i = 0; i < m; i++) {
@@ -47,7 +50,8 @@ public class YisanSiliuFapaiStrategy implements FapaiStrategy {
 						player.addShouPai(pukePai);
 					}
 					for (int j = 0; j < n; j++) {
-						avaliablePaiList.remove(0);
+						PukePai pukePai = avaliablePaiList.remove(0);
+						remainPaiList.add(pukePai);
 					}
 				}
 			}

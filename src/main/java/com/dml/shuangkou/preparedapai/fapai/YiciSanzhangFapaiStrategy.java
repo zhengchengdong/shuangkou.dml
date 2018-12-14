@@ -1,5 +1,6 @@
 package com.dml.shuangkou.preparedapai.fapai;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -21,6 +22,7 @@ public class YiciSanzhangFapaiStrategy implements FapaiStrategy {
 		Pan currentPan = ju.getCurrentPan();
 		List<String> playerIds = currentPan.getAllPlayerId();
 		List<PukePai> avaliablePaiList = currentPan.getAvaliablePaiList();
+		List<PukePai> remainPaiList = new ArrayList<>();
 		Map<String, ShuangkouPlayer> shuangkouPlayerIdMajiangPlayerMap = currentPan
 				.getShuangkouPlayerIdMajiangPlayerMap();
 		if (playerIds.size() > 2) {// 4人
@@ -41,12 +43,13 @@ public class YiciSanzhangFapaiStrategy implements FapaiStrategy {
 						player.addShouPai(pukePai);
 					}
 					for (int j = 0; j < 3; j++) {
-						avaliablePaiList.remove(0);
+						PukePai pukePai = avaliablePaiList.remove(0);
+						remainPaiList.add(pukePai);
 					}
 				}
 			}
 		}
-
+		avaliablePaiList.addAll(remainPaiList);
 	}
 
 }

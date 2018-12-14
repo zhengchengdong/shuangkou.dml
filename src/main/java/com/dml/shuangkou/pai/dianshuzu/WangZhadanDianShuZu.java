@@ -1,5 +1,7 @@
 package com.dml.shuangkou.pai.dianshuzu;
 
+import java.util.Arrays;
+
 import com.dml.puke.pai.DianShu;
 import com.dml.puke.wanfa.dianshu.dianshuzu.ZhadanDianShuZu;
 
@@ -44,6 +46,24 @@ public class WangZhadanDianShuZu extends ZhadanDianShuZu {
 
 	public void setDawangCount(int dawangCount) {
 		this.dawangCount = dawangCount;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		WangZhadanDianShuZu other = (WangZhadanDianShuZu) obj;
+		if (dawangCount != other.dawangCount)
+			return false;
+		if (!Arrays.equals(dianShuZu, other.dianShuZu))
+			return false;
+		if (xiaowangCount != other.xiaowangCount)
+			return false;
+		return true;
 	}
 
 }

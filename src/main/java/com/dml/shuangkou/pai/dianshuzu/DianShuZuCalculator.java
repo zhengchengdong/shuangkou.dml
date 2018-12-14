@@ -768,18 +768,6 @@ public class DianShuZuCalculator {
 				Map<DianShu, Integer> dianshuCountMap = new HashMap<>();
 				DianShu[] lianXuDianShuArray = lianXuZhadanDianShuZu.getLianXuDianShuArray();
 				int[] lianXuDianShuSizeArray = lianXuZhadanDianShuZu.getLianXuDianShuSizeArray();
-				double avg = 0;
-				int max = 0;
-				for (int xian = 0; xian < lianXuDianShuSizeArray.length; xian++) {
-					avg += lianXuDianShuSizeArray[xian];
-					if (lianXuDianShuSizeArray[xian] > max) {
-						max = lianXuDianShuSizeArray[xian];
-					}
-				}
-				avg = avg / lianXuDianShuArray.length;
-				if (avg - max >= 1) {
-					continue;
-				}
 				for (DianShu dianshu : lianXuDianShuArray) {
 					for (int i = 0; i < zuhe.length; i++) {
 						if (zuhe[i] == 1 && dianshu.equals(keYongList.get(i).getDangPaiType())) {
