@@ -14,5 +14,5 @@ import com.dml.shuangkou.player.action.da.solution.DaPaiDianShuSolution;
  */
 public interface YaPaiSolutionsTipsFilter {
 	public List<DaPaiDianShuSolution> filter(List<DaPaiDianShuSolution> YaPaiSolutions,
-			Map<Integer, PukePai> allShoupai);
+			Map<Integer, PukePai> allShoupai, boolean yapai);
 }

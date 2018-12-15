@@ -92,7 +92,7 @@ public class Ju {
 				allKedaPaiSolutionsGenerator.generateAllKedaPaiSolutions(player.getAllShoupai()));
 
 		// 提示
-		player.generateYaPaiSolutionsForTips(yaPaiSolutionsTipsFilter);
+		player.generateNotYaPaiSolutionsForTips(yaPaiSolutionsTipsFilter);
 
 		// 滑动提示
 		// player.generateDaPaiSolutionsForTips(kedaPaiSolutionsForTipsGenerator);
@@ -127,7 +127,7 @@ public class Ju {
 				allKedaPaiSolutionsGenerator.generateAllKedaPaiSolutions(player.getAllShoupai()));
 
 		// 提示
-		player.generateYaPaiSolutionsForTips(yaPaiSolutionsTipsFilter);
+		player.generateNotYaPaiSolutionsForTips(yaPaiSolutionsTipsFilter);
 
 		// 滑动提示
 		// player.generateDaPaiSolutionsForTips(kedaPaiSolutionsForTipsGenerator);
@@ -178,7 +178,7 @@ public class Ju {
 					allKedaPaiSolutionsGenerator.generateAllKedaPaiSolutions(nextPlayer.getAllShoupai()));
 
 			// 可压提示过滤
-			nextPlayer.generateYaPaiSolutionsForTips(yaPaiSolutionsTipsFilter);
+			nextPlayer.generateNotYaPaiSolutionsForTips(yaPaiSolutionsTipsFilter);
 
 			// 划起提示
 			// nextPlayer.generateDaPaiSolutionsForTips(kedaPaiSolutionsForTipsGenerator);

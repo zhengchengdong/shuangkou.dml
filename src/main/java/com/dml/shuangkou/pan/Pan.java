@@ -109,7 +109,7 @@ public class Pan {
 			throw new PlayerCanNotActionException();
 		}
 		// 如果是大的人打牌，那先要清桌
-		if (ifStartYapai()) {
+		if (latestDapaiPlayerId == null || ifStartYapai()) {
 			shuangkouPlayerIdMajiangPlayerMap.values().forEach((player) -> {
 				player.putPublicDachuPaiZuToLishi();
 			});
