@@ -1,6 +1,7 @@
 package com.dml.shuangkou.preparedapai.xianda;
 
 import com.dml.puke.pai.PukePai;
+import com.dml.puke.wanfa.position.Position;
 import com.dml.shuangkou.ju.Ju;
 import com.dml.shuangkou.pan.Pan;
 import com.dml.shuangkou.player.ShuangkouPlayer;
@@ -25,6 +26,7 @@ public class HongxinbaXiandaPlayerDeterminer implements XiandaPlayerDeterminer {
 				}
 			}
 		}
+		daplayerId = currentPan.playerIdForPosition(Position.dong);
 		return daplayerId;
 	}
 
