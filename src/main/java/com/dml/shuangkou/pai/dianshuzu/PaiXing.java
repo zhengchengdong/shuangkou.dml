@@ -11,7 +11,7 @@ import com.dml.puke.wanfa.dianshu.dianshuzu.SanzhangDianShuZu;
 import com.dml.puke.wanfa.dianshu.dianshuzu.ShunziDianShuZu;
 
 /**
- * 所有的点数组不包括单张点数组
+ * 所有的点数组不包括单张点数组和王炸
  * 
  * @author lsc
  *
@@ -24,7 +24,6 @@ public class PaiXing {
 	private List<ShunziDianShuZu> shunziDianShuZuList = new ArrayList<>();
 	private List<DanGeZhadanDianShuZu> zhadanDianShuZuList = new ArrayList<>();
 	private List<LianXuZhadanDianShuZu> lianXuZhadanDianShuZuList = new ArrayList<>();
-	private List<WangZhadanDianShuZu> wangZhadanDianShuZuList = new ArrayList<>();
 
 	public PaiXing() {
 
@@ -33,7 +32,7 @@ public class PaiXing {
 	public PaiXing(List<DuiziDianShuZu> duiziDianShuZuList, List<LianduiDianShuZu> lianduiDianShuZuList,
 			List<LiansanzhangDianShuZu> liansanzhangDianShuZuList, List<SanzhangDianShuZu> sanzhangDianShuZuList,
 			List<ShunziDianShuZu> shunziDianShuZuList, List<DanGeZhadanDianShuZu> zhadanDianShuZuList,
-			List<LianXuZhadanDianShuZu> lianXuZhadanDianShuZuList, List<WangZhadanDianShuZu> wangZhadanDianShuZuList) {
+			List<LianXuZhadanDianShuZu> lianXuZhadanDianShuZuList) {
 		this.duiziDianShuZuList = duiziDianShuZuList;
 		this.lianduiDianShuZuList = lianduiDianShuZuList;
 		this.liansanzhangDianShuZuList = liansanzhangDianShuZuList;
@@ -41,12 +40,10 @@ public class PaiXing {
 		this.shunziDianShuZuList = shunziDianShuZuList;
 		this.zhadanDianShuZuList = zhadanDianShuZuList;
 		this.lianXuZhadanDianShuZuList = lianXuZhadanDianShuZuList;
-		this.wangZhadanDianShuZuList = wangZhadanDianShuZuList;
 	}
 
 	public boolean hasZhadan() {
-		if (!wangZhadanDianShuZuList.isEmpty() || !lianXuZhadanDianShuZuList.isEmpty()
-				|| !zhadanDianShuZuList.isEmpty()) {
+		if (!lianXuZhadanDianShuZuList.isEmpty() || !zhadanDianShuZuList.isEmpty()) {
 			return true;
 		}
 		return false;
@@ -106,14 +103,6 @@ public class PaiXing {
 
 	public void setLianXuZhadanDianShuZuList(List<LianXuZhadanDianShuZu> lianXuZhadanDianShuZuList) {
 		this.lianXuZhadanDianShuZuList = lianXuZhadanDianShuZuList;
-	}
-
-	public List<WangZhadanDianShuZu> getWangZhadanDianShuZuList() {
-		return wangZhadanDianShuZuList;
-	}
-
-	public void setWangZhadanDianShuZuList(List<WangZhadanDianShuZu> wangZhadanDianShuZuList) {
-		this.wangZhadanDianShuZuList = wangZhadanDianShuZuList;
 	}
 
 }

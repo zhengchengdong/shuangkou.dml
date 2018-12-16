@@ -12,7 +12,6 @@ import com.dml.puke.wanfa.dianshu.dianshuzu.ShunziDianShuZu;
 import com.dml.puke.wanfa.dianshu.paizu.DianShuZuPaiZu;
 import com.dml.shuangkou.pai.dianshuzu.LianXuZhadanDianShuZu;
 import com.dml.shuangkou.pai.dianshuzu.WangZhadanDianShuZu;
-import com.dml.shuangkou.pai.waihao.WaihaoGenerator;
 
 public class ShuangkouWaihaoGenerator implements WaihaoGenerator {
 
@@ -63,9 +62,9 @@ public class ShuangkouWaihaoGenerator implements WaihaoGenerator {
 			WangZhadanDianShuZu wangZhadanDianShuZu = (WangZhadanDianShuZu) dianShuZu;
 			int xiaowangCount = wangZhadanDianShuZu.getXiaowangCount();
 			int dawangCount = wangZhadanDianShuZu.getDawangCount();
-			if (xiaowangCount + dawangCount == 4) {
+			if (xiaowangCount + dawangCount == 3) {
 				dianShuZuPaiZu.setWaihao("sanwangzha");
-			} else if (xiaowangCount + dawangCount == 3) {
+			} else if (xiaowangCount + dawangCount == 4) {
 				dianShuZuPaiZu.setWaihao("sisiling");
 			}
 		}
