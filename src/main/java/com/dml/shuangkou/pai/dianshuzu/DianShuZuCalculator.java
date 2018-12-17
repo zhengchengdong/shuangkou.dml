@@ -26,37 +26,79 @@ import com.dml.shuangkou.wanfa.BianXingWanFa;
  *
  */
 public class DianShuZuCalculator {
+
 	/**
-	 * 计算出所有可打的点数组
+	 * 计算对子点数组
 	 */
-	public static PaiXing calculateAllDianShuZu(int[] dianshuCountArray) {
+	public static void calculateDuiziDianShuZu(int[] dianshuCountArray, PaiXing paiXing) {
 		// 对子
 		List<DuiziDianShuZu> duiziDianShuZuList = DianShuZuGenerator.generateAllDuiziDianShuZu(dianshuCountArray);
+		paiXing.setDuiziDianShuZuList(duiziDianShuZuList);
+	}
+
+	/**
+	 * 计算连对点数组
+	 */
+	public static void calculateLianduiDianShuZu(int[] dianshuCountArray, PaiXing paiXing) {
 		// 连对
 		List<LianduiDianShuZu> lianduiDianShuZuList = new ArrayList<>();
 		for (int k = 3; k < 14; k++) {// 最小3连，最大13连
 			lianduiDianShuZuList.addAll(DianShuZuGenerator.generateAllLianduiDianShuZu(dianshuCountArray, k));
 		}
+		paiXing.setLianduiDianShuZuList(lianduiDianShuZuList);
+	}
+
+	/**
+	 * 计算连三张点数组
+	 */
+	public static void calculateLiansanzhangDianShuZu(int[] dianshuCountArray, PaiXing paiXing) {
 		// 连三张
 		List<LiansanzhangDianShuZu> liansanzhangDianShuZuList = new ArrayList<>();
 		for (int k = 3; k < 10; k++) {// 最小3连，最大9连
 			liansanzhangDianShuZuList.addAll(DianShuZuGenerator.generateAllLiansanzhangDianShuZu(dianshuCountArray, k));
 		}
+		paiXing.setLiansanzhangDianShuZuList(liansanzhangDianShuZuList);
+	}
+
+	/**
+	 * 计算三张点数组
+	 */
+	public static void calculateSanzhangDianShuZu(int[] dianshuCountArray, PaiXing paiXing) {
 		// 三张牌
 		List<SanzhangDianShuZu> sanzhangDianShuZuList = DianShuZuGenerator
 				.generateAllSanzhangDianShuZu(dianshuCountArray);
+		paiXing.setSanzhangDianShuZuList(sanzhangDianShuZuList);
+	}
+
+	/**
+	 * 计算顺子点数组
+	 */
+	public static void calculateShunziDianShuZu(int[] dianshuCountArray, PaiXing paiXing) {
 		// 顺子
 		List<ShunziDianShuZu> shunziDianShuZuList = new ArrayList<>();
 		for (int k = 5; k < 14; k++) {// 最小5连，最大13连
 			shunziDianShuZuList.addAll(DianShuZuGenerator.generateAllShunziDianShuZu(dianshuCountArray, k));
 		}
+		paiXing.setShunziDianShuZuList(shunziDianShuZuList);
+	}
+
+	/**
+	 * 计算普通炸弹点数组
+	 */
+	public static void calculateDanGeZhadanDianShuZu(int[] dianshuCountArray, PaiXing paiXing) {
 		// 炸弹
 		List<DanGeZhadanDianShuZu> zhadanDianShuZuList = DianShuZuGenerator
 				.generateAllZhadanDianShuZu(dianshuCountArray);
+		paiXing.setZhadanDianShuZuList(zhadanDianShuZuList);
+	}
+
+	/**
+	 * 计算连续炸弹点数组
+	 */
+	public static void calculateLianXuZhadanDianShuZu(int[] dianshuCountArray, PaiXing paiXing) {
 		// 连续炸弹
 		List<LianXuZhadanDianShuZu> lianXuZhadanDianShuZuList = generateAllLianXuZhadanDianShuZu(dianshuCountArray);
-		return new PaiXing(duiziDianShuZuList, lianduiDianShuZuList, liansanzhangDianShuZuList, sanzhangDianShuZuList,
-				shunziDianShuZuList, zhadanDianShuZuList, lianXuZhadanDianShuZuList);
+		paiXing.setLianXuZhadanDianShuZuList(lianXuZhadanDianShuZuList);
 	}
 
 	/**
@@ -421,6 +463,7 @@ public class DianShuZuCalculator {
 						k++;
 					}
 				}
+				// 不能全都是王当的牌
 				if (k >= 2) {
 					continue;
 				}
@@ -463,6 +506,7 @@ public class DianShuZuCalculator {
 						k++;
 					}
 				}
+				// 不能全都是王当的牌
 				if (k >= 3) {
 					continue;
 				}
@@ -505,6 +549,7 @@ public class DianShuZuCalculator {
 						k++;
 					}
 				}
+				// 不能全都是王当的牌
 				if (k >= zhadanDianShuZu.getSize()) {
 					continue;
 				}
@@ -807,6 +852,9 @@ public class DianShuZuCalculator {
 		return lianXuZhadanList;
 	}
 
+	/**
+	 * 顺子、连对、连三张的排序
+	 */
 	public static List<DianShu> dianshuSort(List<DianShu> dachuDianShuList, DianShu[] lianXuDianShuArray, int size,
 			BianXingWanFa bx) {
 		LinkedList<DianShu> finalDianShuList = new LinkedList<>();
@@ -832,19 +880,23 @@ public class DianShuZuCalculator {
 					finalDianShuList.addAll(dawangDianShuList);
 					return finalDianShuList;
 				} else {
+					boolean has = false;
 					for (int j = 0; j < dachuDianShuList.size(); j++) {
 						DianShu dachuDainshu = dachuDianShuList.get(j);
 						if (dachuDainshu.equals(dianshu)) {
 							finalDianShuList.add(dachuDainshu);
 							dachuDianShuList.remove(j);
+							has = true;
 							break;
-						} else if (bx.equals(BianXingWanFa.qianbian)) {
+						}
+					}
+					if (!has) {
+						if (bx.equals(BianXingWanFa.qianbian)) {
 							if (!xiaowangDianShuList.isEmpty()) {
 								finalDianShuList.add(xiaowangDianShuList.removeFirst());
 							} else {
 								finalDianShuList.add(dawangDianShuList.removeFirst());
 							}
-							break;
 						} else if (bx.equals(BianXingWanFa.banqianbian)) {
 							if (!xiaowangDianShuList.isEmpty()) {
 								finalDianShuList.add(xiaowangDianShuList.removeFirst());
@@ -852,7 +904,8 @@ public class DianShuZuCalculator {
 							} else {
 								finalDianShuList.add(dawangDianShuList.removeFirst());
 							}
-							break;
+						} else if (bx.equals(BianXingWanFa.baibian)) {
+							finalDianShuList.add(dawangDianShuList.removeFirst());
 						}
 					}
 				}

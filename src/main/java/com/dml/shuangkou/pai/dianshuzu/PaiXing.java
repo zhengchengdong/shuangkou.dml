@@ -29,19 +29,6 @@ public class PaiXing {
 
 	}
 
-	public PaiXing(List<DuiziDianShuZu> duiziDianShuZuList, List<LianduiDianShuZu> lianduiDianShuZuList,
-			List<LiansanzhangDianShuZu> liansanzhangDianShuZuList, List<SanzhangDianShuZu> sanzhangDianShuZuList,
-			List<ShunziDianShuZu> shunziDianShuZuList, List<DanGeZhadanDianShuZu> zhadanDianShuZuList,
-			List<LianXuZhadanDianShuZu> lianXuZhadanDianShuZuList) {
-		this.duiziDianShuZuList = duiziDianShuZuList;
-		this.lianduiDianShuZuList = lianduiDianShuZuList;
-		this.liansanzhangDianShuZuList = liansanzhangDianShuZuList;
-		this.sanzhangDianShuZuList = sanzhangDianShuZuList;
-		this.shunziDianShuZuList = shunziDianShuZuList;
-		this.zhadanDianShuZuList = zhadanDianShuZuList;
-		this.lianXuZhadanDianShuZuList = lianXuZhadanDianShuZuList;
-	}
-
 	public boolean hasZhadan() {
 		if (!lianXuZhadanDianShuZuList.isEmpty() || !zhadanDianShuZuList.isEmpty()) {
 			return true;
