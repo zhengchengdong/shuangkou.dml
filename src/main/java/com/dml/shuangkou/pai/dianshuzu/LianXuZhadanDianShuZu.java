@@ -70,6 +70,12 @@ public class LianXuZhadanDianShuZu extends ZhadanDianShuZu {
 	}
 
 	@Override
+	public int hashCode() {
+		int result = 1;
+		return result;
+	}
+
+	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;

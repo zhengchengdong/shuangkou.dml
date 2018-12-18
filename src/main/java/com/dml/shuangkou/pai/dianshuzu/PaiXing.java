@@ -22,7 +22,7 @@ public class PaiXing {
 	private List<LiansanzhangDianShuZu> liansanzhangDianShuZuList = new ArrayList<>();
 	private List<SanzhangDianShuZu> sanzhangDianShuZuList = new ArrayList<>();
 	private List<ShunziDianShuZu> shunziDianShuZuList = new ArrayList<>();
-	private List<DanGeZhadanDianShuZu> zhadanDianShuZuList = new ArrayList<>();
+	private List<DanGeZhadanDianShuZu> danGeZhadanDianShuZuList = new ArrayList<>();
 	private List<LianXuZhadanDianShuZu> lianXuZhadanDianShuZuList = new ArrayList<>();
 
 	public PaiXing() {
@@ -30,7 +30,7 @@ public class PaiXing {
 	}
 
 	public boolean hasZhadan() {
-		if (!lianXuZhadanDianShuZuList.isEmpty() || !zhadanDianShuZuList.isEmpty()) {
+		if (!lianXuZhadanDianShuZuList.isEmpty() || !danGeZhadanDianShuZuList.isEmpty()) {
 			return true;
 		}
 		return false;
@@ -76,12 +76,12 @@ public class PaiXing {
 		this.shunziDianShuZuList = shunziDianShuZuList;
 	}
 
-	public List<DanGeZhadanDianShuZu> getZhadanDianShuZuList() {
-		return zhadanDianShuZuList;
+	public List<DanGeZhadanDianShuZu> getDanGeZhadanDianShuZuList() {
+		return danGeZhadanDianShuZuList;
 	}
 
-	public void setZhadanDianShuZuList(List<DanGeZhadanDianShuZu> zhadanDianShuZuList) {
-		this.zhadanDianShuZuList = zhadanDianShuZuList;
+	public void setDanGeZhadanDianShuZuList(List<DanGeZhadanDianShuZu> danGeZhadanDianShuZuList) {
+		this.danGeZhadanDianShuZuList = danGeZhadanDianShuZuList;
 	}
 
 	public List<LianXuZhadanDianShuZu> getLianXuZhadanDianShuZuList() {

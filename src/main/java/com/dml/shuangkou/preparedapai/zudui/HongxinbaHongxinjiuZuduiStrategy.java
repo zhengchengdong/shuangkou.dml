@@ -1,6 +1,7 @@
 package com.dml.shuangkou.preparedapai.zudui;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import com.dml.puke.pai.PukePai;
@@ -25,6 +26,7 @@ public class HongxinbaHongxinjiuZuduiStrategy implements ZuduiStrategy {
 	public void zudui(Ju ju) throws Exception {
 		Pan currentPan = ju.getCurrentPan();
 		List<String> playerIdList = currentPan.sortedPlayerIdList();
+		Collections.shuffle(playerIdList);
 		List<Position> pList = new ArrayList<>();
 		pList.add(Position.xi);
 		pList.add(Position.nan);
