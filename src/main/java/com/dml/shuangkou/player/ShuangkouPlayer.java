@@ -75,14 +75,14 @@ public class ShuangkouPlayer {
 			throw new DaPaiException();
 		}
 		List<DianShu> dapaiDianshuList = new ArrayList<>();
-		PukePai[] paiArray = new PukePai[paiIds.size()];
+		List<PukePai> paiList = new ArrayList<>();
 		for (int i = 0; i < paiIds.size(); i++) {
 			Integer paiId = paiIds.get(i);
 			PukePai pai = allShoupai.get(paiId);
 			if (pai == null) {
 				throw new DaPaiException();
 			}
-			paiArray[i] = pai;
+			paiList.add(pai);
 			dapaiDianshuList.add(pai.getPaiMian().dianShu());
 		}
 		DianShu[] solutionDianShuArray = solution.getDachuDianShuArray();
@@ -101,6 +101,18 @@ public class ShuangkouPlayer {
 		// }
 		DianShuZuPaiZu newPublicDachuPaiZu = new DianShuZuPaiZu();
 		newPublicDachuPaiZu.setDianShuZu(solution.getDianShuZu());
+		// 对打出的牌进行排序
+		DianShu[] dachuDianShuArray = solution.getDachuDianShuArray();
+		PukePai[] paiArray = new PukePai[paiList.size()];
+		for (int i = 0; i < dachuDianShuArray.length; i++) {
+			DianShu dianshu = dachuDianShuArray[i];
+			for (int j = 0; j < paiList.size(); j++) {
+				if (paiList.get(j).getPaiMian().dianShu().equals(dianshu)) {
+					paiArray[i] = paiList.remove(j);
+					break;
+				}
+			}
+		}
 		newPublicDachuPaiZu.setPaiArray(paiArray);
 		waihaoGenerator.generateWaihao(newPublicDachuPaiZu);
 		publicDachuPaiZu = newPublicDachuPaiZu;

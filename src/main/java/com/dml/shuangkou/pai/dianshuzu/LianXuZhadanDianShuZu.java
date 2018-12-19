@@ -71,8 +71,9 @@ public class LianXuZhadanDianShuZu extends ZhadanDianShuZu {
 
 	@Override
 	public int hashCode() {
-		int result = 1;
-		return result;
+		return lianXuDianShuArray.hashCode() + lianXuDianShuSizeArray.hashCode() * 10;
+		// return
+		// Arrays.hashCode(lianXuDianShuArray)+Arrays.hashCode(lianXuDianShuSizeArray)*10;
 	}
 
 	@Override

@@ -50,8 +50,7 @@ public class WangZhadanDianShuZu extends ZhadanDianShuZu {
 
 	@Override
 	public int hashCode() {
-		int result = 1;
-		return result;
+		return Arrays.hashCode(dianShuZu) + xiaowangCount + dawangCount * 10;
 	}
 
 	@Override
@@ -65,9 +64,9 @@ public class WangZhadanDianShuZu extends ZhadanDianShuZu {
 		WangZhadanDianShuZu other = (WangZhadanDianShuZu) obj;
 		if (dawangCount != other.dawangCount)
 			return false;
-		if (!Arrays.equals(dianShuZu, other.dianShuZu))
-			return false;
 		if (xiaowangCount != other.xiaowangCount)
+			return false;
+		if (!Arrays.equals(dianShuZu, other.dianShuZu))
 			return false;
 		return true;
 	}
