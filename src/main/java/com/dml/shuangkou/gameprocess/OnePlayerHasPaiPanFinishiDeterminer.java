@@ -25,7 +25,7 @@ public class OnePlayerHasPaiPanFinishiDeterminer implements CurrentPanFinishiDet
 				return true;
 			}
 		}
-		if (currentPan.getAllPlayerId().size() - playerIds.size() <= 1) {
+		if (currentPan.findAllPlayerId().size() - playerIds.size() <= 1) {
 			return true;
 		}
 		return false;

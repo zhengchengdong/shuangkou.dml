@@ -43,7 +43,7 @@ public class Pan {
 		return !player.getAllShoupai().isEmpty();
 	}
 
-	public List<String> getAllPlayerId() {
+	public List<String> findAllPlayerId() {
 		return new ArrayList<>(shuangkouPlayerIdMajiangPlayerMap.keySet());
 	}
 

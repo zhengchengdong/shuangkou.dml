@@ -20,7 +20,7 @@ public class YisanSiliuFapaiStrategy implements FapaiStrategy {
 	@Override
 	public void fapai(Ju ju) throws Exception {
 		Pan currentPan = ju.getCurrentPan();
-		List<String> playerIds = currentPan.getAllPlayerId();
+		List<String> playerIds = currentPan.findAllPlayerId();
 		List<PukePai> avaliablePaiList = currentPan.getAvaliablePaiList();
 		List<PukePai> remainPaiList = new ArrayList<>();
 		Map<String, ShuangkouPlayer> shuangkouPlayerIdMajiangPlayerMap = currentPan
