@@ -904,16 +904,19 @@ public class DianShuZuCalculator {
 			int lianXuZhadanLianXuCount = 0;
 			int j = i;
 			while (j < 19 && dianShuAmountArray[j % 13] >= 4) {// 任意4张或者4张以上点数相连的牌，3起最小，到2
-				dianshuZhangshuArray[j - i] = dianShuAmountArray[j % 13];
 				lianXuZhadanLianXuCount++;
 				j++;
 			}
 			if (lianXuZhadanLianXuCount >= 3) {
-				DianShu[] lianXuDianShuArray = new DianShu[lianXuZhadanLianXuCount];
-				for (int k = 0; k < lianXuZhadanLianXuCount; k++) {
-					lianXuDianShuArray[k] = DianShu.getDianShuByOrdinal((i + k) % 13);
+				for (int size = 3; size <= lianXuZhadanLianXuCount; size++) {
+					DianShu[] lianXuDianShuArray = new DianShu[size];
+					for (int k = 0; k < size; k++) {
+						dianshuZhangshuArray[k] = dianShuAmountArray[i + k % 13];
+						lianXuDianShuArray[k] = DianShu.getDianShuByOrdinal((i + k) % 13);
+					}
+					calcuateLianXuZhadanDianShuZu(lianXuDianShuArray, dianshuZhangshuArray.clone(), lianXuZhadanList,
+							0);
 				}
-				calcuateLianXuZhadanDianShuZu(lianXuDianShuArray, dianshuZhangshuArray.clone(), lianXuZhadanList, 0);
 			}
 		}
 		return lianXuZhadanList;
