@@ -62,6 +62,10 @@ public class Pan {
 		}
 	}
 
+	public boolean isNextActionNo(int actionNo) {
+		return actionFrameList.size() == actionNo;
+	}
+
 	public void addPlayer(String playerId) {
 		ShuangkouPlayer shuangkouPlayer = new ShuangkouPlayer();
 		shuangkouPlayer.setId(playerId);
