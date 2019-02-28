@@ -911,7 +911,7 @@ public class DianShuZuCalculator {
 				for (int size = 3; size <= lianXuZhadanLianXuCount; size++) {
 					DianShu[] lianXuDianShuArray = new DianShu[size];
 					for (int k = 0; k < size; k++) {
-						dianshuZhangshuArray[k] = dianShuAmountArray[i + k % 13];
+						dianshuZhangshuArray[k] = dianShuAmountArray[(i + k) % 13];
 						lianXuDianShuArray[k] = DianShu.getDianShuByOrdinal((i + k) % 13);
 					}
 					calcuateLianXuZhadanDianShuZu(lianXuDianShuArray, dianshuZhangshuArray.clone(), lianXuZhadanList,

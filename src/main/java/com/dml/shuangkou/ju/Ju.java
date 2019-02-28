@@ -13,7 +13,6 @@ import com.dml.shuangkou.pan.PanResult;
 import com.dml.shuangkou.pan.PanValueObject;
 import com.dml.shuangkou.player.ShuangkouPlayer;
 import com.dml.shuangkou.player.action.ActionStatisticsListenerManager;
-import com.dml.shuangkou.player.action.WrongActionNoException;
 import com.dml.shuangkou.player.action.da.AllKedaPaiSolutionsGenerator;
 import com.dml.shuangkou.player.action.da.DaAction;
 import com.dml.shuangkou.player.action.da.DaActionStatisticsListener;
@@ -139,11 +138,8 @@ public class Ju {
 
 	}
 
-	public PanActionFrame da(String playerId, List<Integer> paiIds, String dianshuZuheIdx, int actionNo,
-			long actionTime) throws Exception {
-		if (!currentPan.isNextActionNo(actionNo)) {
-			throw new WrongActionNoException();
-		}
+	public PanActionFrame da(String playerId, List<Integer> paiIds, String dianshuZuheIdx, long actionTime)
+			throws Exception {
 		DaAction daAction = currentPan.da(playerId, paiIds, dianshuZuheIdx, waihaoGenerator);
 		// 理牌每次要理的
 		currentPan.findPlayer(playerId).lipai(shoupaiSortStrategy);
@@ -172,10 +168,7 @@ public class Ju {
 
 	}
 
-	public PanActionFrame guo(String playerId, int actionNo, long actionTime) throws Exception {
-		if (!currentPan.isNextActionNo(actionNo)) {
-			throw new WrongActionNoException();
-		}
+	public PanActionFrame guo(String playerId, long actionTime) throws Exception {
 		GuoAction guoAction = currentPan.guo(playerId);
 		actionStatisticsListenerManager.updateGuoActionListener(guoAction, this);
 		// 看下一人是否是最后出牌人
