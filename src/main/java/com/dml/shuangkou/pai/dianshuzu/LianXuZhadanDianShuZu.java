@@ -53,6 +53,14 @@ public class LianXuZhadanDianShuZu extends ZhadanDianShuZu {
 		}
 	}
 
+	public int getZhangshu() {
+		int sum = 0;
+		for (int i : lianXuDianShuSizeArray) {
+			sum += i;
+		}
+		return sum;
+	}
+
 	public DianShu[] getLianXuDianShuArray() {
 		return lianXuDianShuArray;
 	}
