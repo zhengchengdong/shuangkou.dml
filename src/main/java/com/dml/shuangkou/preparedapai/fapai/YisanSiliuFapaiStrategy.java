@@ -23,8 +23,7 @@ public class YisanSiliuFapaiStrategy implements FapaiStrategy {
 		List<String> playerIds = currentPan.findAllPlayerId();
 		List<PukePai> avaliablePaiList = currentPan.getAvaliablePaiList();
 		List<PukePai> remainPaiList = new ArrayList<>();
-		Map<String, ShuangkouPlayer> shuangkouPlayerIdMajiangPlayerMap = currentPan
-				.getShuangkouPlayerIdMajiangPlayerMap();
+		Map<String, ShuangkouPlayer> shuangkouPlayerIdMajiangPlayerMap = currentPan.getShuangkouPlayerIdPlayerMap();
 		fapai(playerIds, avaliablePaiList, remainPaiList, shuangkouPlayerIdMajiangPlayerMap, 1, 3);
 		fapai(playerIds, avaliablePaiList, remainPaiList, shuangkouPlayerIdMajiangPlayerMap, 4, 6);
 		avaliablePaiList.addAll(remainPaiList);

@@ -23,8 +23,7 @@ public class YiciSanzhangFapaiStrategy implements FapaiStrategy {
 		List<String> playerIds = currentPan.findAllPlayerId();
 		List<PukePai> avaliablePaiList = currentPan.getAvaliablePaiList();
 		List<PukePai> remainPaiList = new ArrayList<>();
-		Map<String, ShuangkouPlayer> shuangkouPlayerIdMajiangPlayerMap = currentPan
-				.getShuangkouPlayerIdMajiangPlayerMap();
+		Map<String, ShuangkouPlayer> shuangkouPlayerIdMajiangPlayerMap = currentPan.getShuangkouPlayerIdPlayerMap();
 		if (playerIds.size() > 2) {// 4人
 			for (int i = 0; i < 9; i++) {
 				for (ShuangkouPlayer player : shuangkouPlayerIdMajiangPlayerMap.values()) {

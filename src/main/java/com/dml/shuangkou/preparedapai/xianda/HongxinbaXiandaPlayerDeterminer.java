@@ -18,7 +18,7 @@ public class HongxinbaXiandaPlayerDeterminer implements XiandaPlayerDeterminer {
 	public String determineXiandaPlayer(Ju ju) {
 		Pan currentPan = ju.getCurrentPan();
 		String daplayerId = null;
-		for (ShuangkouPlayer player : currentPan.getShuangkouPlayerIdMajiangPlayerMap().values()) {
+		for (ShuangkouPlayer player : currentPan.getShuangkouPlayerIdPlayerMap().values()) {
 			for (PukePai pukePai : player.getAllShoupai().values()) {
 				if (pukePai.getMark() != null && pukePai.getMark().name().equals("qishouLiangPai")) {
 					daplayerId = player.getId();

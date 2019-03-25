@@ -25,7 +25,7 @@ public class PanValueObject {
 	public PanValueObject(Pan pan) {
 		no = pan.getNo();
 		shuangkouPlayerList = new ArrayList<>();
-		pan.getShuangkouPlayerIdMajiangPlayerMap().values()
+		pan.getShuangkouPlayerIdPlayerMap().values()
 				.forEach((shuangkouPlayer) -> shuangkouPlayerList.add(new ShuangkouPlayerValueObject(shuangkouPlayer)));
 		paiListValueObject = new PaiListValueObject(pan.getAvaliablePaiList());
 		positionPlayerIdMap = new HashMap<>(pan.getPositionPlayerIdMap());

@@ -33,7 +33,7 @@ public class HongxinbaHongxinjiuZuduiStrategy implements ZuduiStrategy {
 		pList.add(Position.bei);
 		String qishouPlayerId = null;
 		String duijiaPlayerId = null;
-		for (ShuangkouPlayer player : currentPan.getShuangkouPlayerIdMajiangPlayerMap().values()) {
+		for (ShuangkouPlayer player : currentPan.getShuangkouPlayerIdPlayerMap().values()) {
 			for (PukePai pukePai : player.getAllShoupai().values()) {
 				if (qishouPlayerId == null && pukePai.getPaiMian().equals(PukePaiMian.hongxinba)) {
 					pukePai.setMark(new QiShouLiangPaiMark());

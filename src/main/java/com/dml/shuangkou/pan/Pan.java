@@ -25,7 +25,7 @@ import com.dml.shuangkou.player.action.guo.GuoAction;
 
 public class Pan {
 	private int no;
-	private Map<String, ShuangkouPlayer> shuangkouPlayerIdMajiangPlayerMap = new HashMap<>();
+	private Map<String, ShuangkouPlayer> shuangkouPlayerIdPlayerMap = new HashMap<>();
 	private Map<Position, String> positionPlayerIdMap = new HashMap<>();
 	private List<PukePai> avaliablePaiList = new ArrayList<>();
 	private List<DianShuZuPaiZu> dachuPaiZuList = new ArrayList<>();
@@ -36,7 +36,7 @@ public class Pan {
 	private List<PanActionFrame> actionFrameList = new ArrayList<>();
 
 	public boolean ifPlayerHasPai(String playerId) throws PlayerNotFoundException {
-		ShuangkouPlayer player = shuangkouPlayerIdMajiangPlayerMap.get(playerId);
+		ShuangkouPlayer player = shuangkouPlayerIdPlayerMap.get(playerId);
 		if (player == null) {
 			throw new PlayerNotFoundException();
 		}
@@ -44,7 +44,7 @@ public class Pan {
 	}
 
 	public List<String> findAllPlayerId() {
-		return new ArrayList<>(shuangkouPlayerIdMajiangPlayerMap.keySet());
+		return new ArrayList<>(shuangkouPlayerIdPlayerMap.keySet());
 	}
 
 	public PanActionFrame recordPanActionFrame(ShuangkouPlayerAction action, long actionTime) {
@@ -69,7 +69,7 @@ public class Pan {
 	public void addPlayer(String playerId) {
 		ShuangkouPlayer shuangkouPlayer = new ShuangkouPlayer();
 		shuangkouPlayer.setId(playerId);
-		shuangkouPlayerIdMajiangPlayerMap.put(playerId, shuangkouPlayer);
+		shuangkouPlayerIdPlayerMap.put(playerId, shuangkouPlayer);
 	}
 
 	public void addFrame(PanActionFrame panActionFrame) {
@@ -77,13 +77,13 @@ public class Pan {
 	}
 
 	public List<String> sortedPlayerIdList() {
-		List<String> list = new ArrayList<>(shuangkouPlayerIdMajiangPlayerMap.keySet());
+		List<String> list = new ArrayList<>(shuangkouPlayerIdPlayerMap.keySet());
 		Collections.sort(list);
 		return list;
 	}
 
 	public void updateActionPositionByActionPlayer(String playerId) throws Exception {
-		ShuangkouPlayer player = shuangkouPlayerIdMajiangPlayerMap.get(playerId);
+		ShuangkouPlayer player = shuangkouPlayerIdPlayerMap.get(playerId);
 		if (player == null) {
 			throw new PlayerNotFoundException();
 		}
@@ -91,7 +91,7 @@ public class Pan {
 	}
 
 	public void updatePlayerPosition(String playerId, Position position) throws PlayerNotFoundException {
-		ShuangkouPlayer player = shuangkouPlayerIdMajiangPlayerMap.get(playerId);
+		ShuangkouPlayer player = shuangkouPlayerIdPlayerMap.get(playerId);
 		if (player == null) {
 			throw new PlayerNotFoundException();
 		}
@@ -105,7 +105,7 @@ public class Pan {
 
 	public DaAction da(String playerId, List<Integer> paiIds, String dianshuZuheIdx, WaihaoGenerator waihaoGenerator)
 			throws Exception {
-		ShuangkouPlayer daPlayer = shuangkouPlayerIdMajiangPlayerMap.get(playerId);
+		ShuangkouPlayer daPlayer = shuangkouPlayerIdPlayerMap.get(playerId);
 		if (daPlayer == null) {
 			throw new PlayerNotFoundException();
 		}
@@ -114,7 +114,7 @@ public class Pan {
 		}
 		// 如果是大的人打牌，那先要清桌
 		if (latestDapaiPlayerId == null || ifStartYapai()) {
-			shuangkouPlayerIdMajiangPlayerMap.values().forEach((player) -> {
+			shuangkouPlayerIdPlayerMap.values().forEach((player) -> {
 				player.putPublicDachuPaiZuToLishi();
 			});
 		}
@@ -133,7 +133,7 @@ public class Pan {
 	}
 
 	public GuoAction guo(String playerId) throws Exception {
-		ShuangkouPlayer player = shuangkouPlayerIdMajiangPlayerMap.get(playerId);
+		ShuangkouPlayer player = shuangkouPlayerIdPlayerMap.get(playerId);
 		if (player == null) {
 			throw new PlayerNotFoundException();
 		}
@@ -152,7 +152,7 @@ public class Pan {
 			ZaDanYaPaiSolutionCalculator zaDanYaPaiCalculator) {
 		String dachuPlayerId = latestDapaiPlayerId;
 		if (dachuPlayerId != null) {
-			ShuangkouPlayer dachuPlayer = shuangkouPlayerIdMajiangPlayerMap.get(dachuPlayerId);
+			ShuangkouPlayer dachuPlayer = shuangkouPlayerIdPlayerMap.get(dachuPlayerId);
 			if (dachuPlayer != null) {
 				DianShuZuPaiZu dachuPaiZu = dachuPlayer.getPublicDachuPaiZu();
 				if (dachuPaiZu != null) {
@@ -224,7 +224,7 @@ public class Pan {
 			nextPosition = PositionUtil.nextPositionClockwise(nextPosition);
 			yapaiPlayerId = positionPlayerIdMap.get(nextPosition);
 		}
-		ShuangkouPlayer yapaiPlayer = shuangkouPlayerIdMajiangPlayerMap.get(yapaiPlayerId);
+		ShuangkouPlayer yapaiPlayer = shuangkouPlayerIdPlayerMap.get(yapaiPlayerId);
 		if (chuifeng) {// 吹风
 			nextPosition = PositionUtil.nextPositionClockwise(actionPosition);
 			yapaiPlayerId = positionPlayerIdMap.get(nextPosition);
@@ -242,11 +242,11 @@ public class Pan {
 	}
 
 	public ShuangkouPlayer findPlayer(String dapaiPlayerId) {
-		return shuangkouPlayerIdMajiangPlayerMap.get(dapaiPlayerId);
+		return shuangkouPlayerIdPlayerMap.get(dapaiPlayerId);
 	}
 
 	public ShuangkouPlayer findDuijiaPlayer(String playerId) {
-		ShuangkouPlayer player = shuangkouPlayerIdMajiangPlayerMap.get(playerId);
+		ShuangkouPlayer player = shuangkouPlayerIdPlayerMap.get(playerId);
 		if (player == null) {
 			return null;
 		}
@@ -256,7 +256,7 @@ public class Pan {
 		if (duijiaPlayerId == null) {
 			return null;
 		}
-		return shuangkouPlayerIdMajiangPlayerMap.get(duijiaPlayerId);
+		return shuangkouPlayerIdPlayerMap.get(duijiaPlayerId);
 	}
 
 	/**
@@ -271,7 +271,7 @@ public class Pan {
 			nextPosition = PositionUtil.nextPositionClockwise(nextPosition);
 			yapaiPlayerId = positionPlayerIdMap.get(nextPosition);
 		}
-		ShuangkouPlayer yapaiPlayer = shuangkouPlayerIdMajiangPlayerMap.get(yapaiPlayerId);
+		ShuangkouPlayer yapaiPlayer = shuangkouPlayerIdPlayerMap.get(yapaiPlayerId);
 		if (chuifeng) {// 吹风
 			nextPosition = PositionUtil.nextPositionClockwise(actionPosition);
 			yapaiPlayerId = positionPlayerIdMap.get(nextPosition);
@@ -298,12 +298,12 @@ public class Pan {
 		this.no = no;
 	}
 
-	public Map<String, ShuangkouPlayer> getShuangkouPlayerIdMajiangPlayerMap() {
-		return shuangkouPlayerIdMajiangPlayerMap;
+	public Map<String, ShuangkouPlayer> getShuangkouPlayerIdPlayerMap() {
+		return shuangkouPlayerIdPlayerMap;
 	}
 
-	public void setShuangkouPlayerIdMajiangPlayerMap(Map<String, ShuangkouPlayer> shuangkouPlayerIdMajiangPlayerMap) {
-		this.shuangkouPlayerIdMajiangPlayerMap = shuangkouPlayerIdMajiangPlayerMap;
+	public void setShuangkouPlayerIdPlayerMap(Map<String, ShuangkouPlayer> shuangkouPlayerIdPlayerMap) {
+		this.shuangkouPlayerIdPlayerMap = shuangkouPlayerIdPlayerMap;
 	}
 
 	public Map<Position, String> getPositionPlayerIdMap() {

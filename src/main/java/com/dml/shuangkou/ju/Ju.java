@@ -81,8 +81,7 @@ public class Ju {
 		// 先乱牌，再发牌，再理牌，再组队
 		luanpaiStrategyForFirstPan.luanpai(this);
 		fapaiStrategyForFirstPan.fapai(this);
-		currentPan.getShuangkouPlayerIdMajiangPlayerMap().values()
-				.forEach((player) -> player.lipai(shoupaiSortStrategy));
+		currentPan.getShuangkouPlayerIdPlayerMap().values().forEach((player) -> player.lipai(shoupaiSortStrategy));
 		zuduiStrategyForFirstPan.zudui(this);
 
 		// 谁第一个打牌
@@ -116,8 +115,7 @@ public class Ju {
 		// 先乱牌，再发牌，再理牌，再组队
 		luanpaiStrategyForNextPan.luanpai(this);
 		fapaiStrategyForNextPan.fapai(this);
-		currentPan.getShuangkouPlayerIdMajiangPlayerMap().values()
-				.forEach((player) -> player.lipai(shoupaiSortStrategy));
+		currentPan.getShuangkouPlayerIdPlayerMap().values().forEach((player) -> player.lipai(shoupaiSortStrategy));
 		zuduiStrategyForNextPan.zudui(this);
 
 		// 谁第一个打牌
