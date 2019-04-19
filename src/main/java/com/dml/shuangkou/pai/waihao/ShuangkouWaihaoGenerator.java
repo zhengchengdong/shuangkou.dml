@@ -54,11 +54,11 @@ public class ShuangkouWaihaoGenerator implements WaihaoGenerator {
 		if (dianShuZu instanceof LianXuZhadanDianShuZu) {
 			LianXuZhadanDianShuZu lianXuZhadanDianShuZu = (LianXuZhadanDianShuZu) dianShuZu;
 			DianShu[] lianXuDianShuArray = lianXuZhadanDianShuZu.getLianXuDianShuArray();
-			int xianshu = lianXuZhadanDianShuZu.getXianShu();
-			if (xianshu < 3) {
-				xianshu = 3;
+			int lianxuCount = lianXuDianShuArray.length;
+			if (lianxuCount < 3) {
+				lianxuCount = 3;
 			}
-			dianShuZuPaiZu.setWaihao(xianshu + "xian" + lianXuDianShuArray.length + "lianzha");
+			dianShuZuPaiZu.setWaihao(lianXuZhadanDianShuZu.getXianShu() + "xian" + lianxuCount + "lianzha");
 		}
 		// 王炸
 		if (dianShuZu instanceof WangZhadanDianShuZu) {
